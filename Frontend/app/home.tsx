@@ -8,7 +8,6 @@ export default function Home() {
       <View style={homeStyles.container}>
         <View></View>
       </View>
-      <BottomBar />
     </View>
   );
 }

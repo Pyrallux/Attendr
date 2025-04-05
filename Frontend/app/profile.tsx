@@ -14,7 +14,6 @@ export default function Profile() {
           <Text style={profileStyles.usernameText}> @username</Text>
         </View>
       </View>
-      <BottomBar />
     </View>
   );
 }

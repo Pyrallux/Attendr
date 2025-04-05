@@ -1,5 +1,6 @@
 import { Stack } from "expo-router";
 import { useState, createContext } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export const AppContext = createContext<{
   user: string;
@@ -9,17 +10,21 @@ export const AppContext = createContext<{
   setUser: () => undefined,
 });
 
+const client = new QueryClient();
+
 export default function RootLayout() {
   const [user, setUser] = useState<string>("");
 
   return (
-    <AppContext.Provider
-      value={{
-        user,
-        setUser,
-      }}
-    >
-      <Stack />
-    </AppContext.Provider>
+    <QueryClientProvider client={client}>
+      <AppContext.Provider
+        value={{
+          user,
+          setUser,
+        }}
+      >
+        <Stack />
+      </AppContext.Provider>
+    </QueryClientProvider>
   );
 }

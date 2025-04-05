@@ -27,6 +27,15 @@ SECRET_KEY = "django-insecure-3frpa7@#r8y^gt@%$)5ckic_yid7dn(^(16c5yzs2)mj&z9nft
 DEBUG = True
 
 
+CORS_ALLOWED_ORIGINS = ["http://localhost:8000", "http://balls.webhop.me:8000"]
+
+CSRF_TRUSTED_ORIGINS = ["http://localhost:8000", "http://balls.webhop.me:8000"]
+
+ALLOWED_HOSTS = [
+    "localhost",
+    "balls.webhop.me",
+]
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -36,6 +45,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "rest_framework",
+    "attendr_back",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [

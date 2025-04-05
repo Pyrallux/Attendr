@@ -7,17 +7,17 @@ export const signinStyles = StyleSheet.create({
   content: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "#4b4b4b",
+    backgroundColor: "#46e56f",
     paddingTop: 0,
 
     borderBlockColor: "black",
   },
   bg: {
     flex: 1,
-    backgroundColor: "#4b4b4b",
+    backgroundColor: "#46e56f",
   },
   border: {
-    borderBlockColor: "white",
+    borderColor: "0f9679",
     borderWidth: 2,
     color: "white",
     fontSize: 24,
@@ -55,4 +55,5 @@ export const signinStyles = StyleSheet.create({
     paddingTop: 80,
     fontFamily: "Jersey10",
   },
+  logoandtitle: {},
 });

@@ -5,6 +5,7 @@ import {
   Button,
   TouchableOpacity,
   ImageBackground,
+  Image,
 } from "react-native";
 import { useContext, useState } from "react";
 import { AppContext } from "./_layout";
@@ -92,13 +93,23 @@ export default function SignIn() {
     return undefined;
   }
 
+  const [isPressed, setIsPressed] = useState(false);
+
+  const handlePress = () => {
+    setTimeout(() => setIsPressed(false), 75);
+  };
+
   return (
     <>
       <View style={signinStyles.bg}>
-        <View style={signinStyles.logo}>
+        <View style={[signinStyles.logo, { flexDirection: "row" }]}>
           <Text style={[signinStyles.logoText, { fontFamily: "Jersey10" }]}>
             Attendr
           </Text>
+          <Image
+            style={{ marginTop: 50, marginLeft: 5 }}
+            source={require("./../assets/images/LOGO.png")}
+          ></Image>
         </View>
         <View style={signinStyles.content}>
           <View style={signinStyles.box}>
@@ -146,27 +157,37 @@ export default function SignIn() {
             )}
 
             <TouchableOpacity
+              onPressIn={() => setIsPressed(true)}
+              onPressOut={() => {
+                setIsPressed(false);
+              }}
               onPress={() => {
                 handleSubmit(onSubmit)();
+                handlePress();
+                setIsPressed(true);
               }}
               style={{ marginTop: 20 }}
             >
               <ImageBackground
-                source={require("./../assets/images/submitButton.png")} // replace with your actual path
+                source={
+                  isPressed
+                    ? require("./../assets/images/submitButton2.png")
+                    : require("./../assets/images/submitButton.png")
+                }
                 style={{
                   width: 200,
                   height: 60,
                   justifyContent: "center",
                   alignItems: "center",
                 }}
-                imageStyle={{ borderRadius: 10 }} // optional rounded corners
+                imageStyle={{ borderRadius: 10 }}
               >
                 <Text
                   style={{
                     color: "white",
                     fontSize: 20,
                     fontFamily: "Jersey10",
-                    paddingBottom: 10,
+                    transform: [{ translateY: isPressed ? 10 : -5 }],
                   }}
                 >
                   Submit

@@ -6,82 +6,89 @@ import {
   TouchableOpacity,
   ImageBackground,
 } from "react-native";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { AppContext } from "./_layout";
 import { signinStyles } from "./signinStyles";
-import { useMutation } from "@tanstack/react-query";
-import { getUsers } from "@/api/api";
+import {
+  QueryClient,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
+import {
+  addGroup,
+  deleteGroup,
+  getGroupDetail,
+  getUsers,
+  updateGroup,
+} from "@/api/api";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "expo-router";
 import { useFonts } from "expo-font";
 
-interface User {
+interface Group {
   id: number;
-  first_name: string;
-  last_name: string;
-  username: string;
-  email: string;
-  points?: number;
-  streak?: number;
-  password: string;
+  name: string;
+  members: number[];
+  admin: string;
 }
 
-interface Login {
-  username: string;
-  password: string;
+interface FormData {
+  name: string;
 }
 
-export default function SignIn() {
-  const { setUser, setUserId } = useContext(AppContext);
-  const [loginError, setLoginError] = useState<string>("");
+export default function EditGroup() {
   const router = useRouter();
+  const { activeGroupId } = useContext(AppContext);
+  const queryClient = useQueryClient();
 
-  const { mutateAsync: getUsersMutation } = useMutation({
+  const { mutateAsync: getGroupDetailMutation, data: groupData } = useMutation({
     mutationKey: ["SignInGetUsers"],
-    mutationFn: () => getUsers(),
+    mutationFn: (id: number) => getGroupDetail(id),
+    onSuccess: (data: Group) => {
+      setValue("name", data.name);
+    },
+  });
+
+  useEffect(() => {
+    getGroupDetailMutation(activeGroupId);
+  }, []);
+
+  const { mutateAsync: updateGroupMutation } = useMutation({
+    mutationFn: (group: Group) => updateGroup(group),
+  });
+
+  const { mutateAsync: deleteGroupMutation } = useMutation({
+    mutationFn: (id: number) => deleteGroup(id),
   });
 
   const schema = yup.object().shape({
-    username: yup.string().max(20).required("*Username is Required"),
-    password: yup.string().required("*Password is Required"),
+    name: yup.string().max(20).required("*Name is Required"),
   });
   const {
     control,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm({
     mode: "onSubmit",
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (formData: Login) => {
-    setLoginError("");
-    let users: User[] = await getUsersMutation();
-    let logins: Login[] = [];
-    for (let i = 0; i < users.length; i++) {
-      logins.push({ username: users[i].username, password: users[i].password });
+  const onSubmit = async (formData: FormData) => {
+    if (groupData) {
+      groupData.name = formData.name;
+      await updateGroupMutation(groupData);
+      queryClient.invalidateQueries(["groupList"]);
+      router.navigate("/groups");
     }
+  };
 
-    let matchingLogin: Login[] = logins.filter(
-      (l: Login) => l.username === formData.username
-    );
-
-    if (!matchingLogin.length) {
-      setLoginError("*Invalid Username or Password");
-      return;
-    }
-    if (matchingLogin[0].password !== formData.password) {
-      setLoginError("*Invalid Username or Password");
-      return;
-    }
-
-    setUser(formData.username);
-    setUserId(
-      users.filter((u: User) => u.username === formData.username)[0].id
-    );
-    router.navigate("/home");
+  const handleDeleteGroup = async () => {
+    await deleteGroupMutation(activeGroupId);
+    queryClient.invalidateQueries(["groupList"]);
+    router.navigate("/groups");
   };
 
   const [fontsLoaded] = useFonts({
@@ -103,48 +110,27 @@ export default function SignIn() {
         <View style={signinStyles.content}>
           <View style={signinStyles.box}>
             <Text style={[signinStyles.header, { fontFamily: "Jersey10" }]}>
-              Sign In
+              Edit Group
             </Text>
 
-            <Text style={signinStyles.text}>Username</Text>
+            <Text style={signinStyles.text}>Name</Text>
             <Controller
               control={control}
-              name="username"
+              name="name"
               render={({ field: { onChange, value } }) => (
                 <TextInput
                   style={signinStyles.border}
-                  placeholder="doejohn2004"
                   placeholderTextColor="gray"
                   onChangeText={onChange}
                   value={value}
                 />
               )}
             />
-            {errors.username && (
+            {errors.name && (
               <Text style={[signinStyles.text, { color: "red" }]}>
-                {errors.username.message}
+                {errors.name.message}
               </Text>
             )}
-
-            <Text style={signinStyles.text}>Password</Text>
-            <Controller
-              control={control}
-              name="password"
-              render={({ field: { onChange, value } }) => (
-                <TextInput
-                  style={signinStyles.border}
-                  secureTextEntry={true}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              )}
-            />
-            {errors.password && (
-              <Text style={[signinStyles.text, { color: "red" }]}>
-                {errors.password.message}
-              </Text>
-            )}
-
             <TouchableOpacity
               onPress={() => {
                 handleSubmit(onSubmit)();
@@ -169,19 +155,11 @@ export default function SignIn() {
                     paddingBottom: 10,
                   }}
                 >
-                  Submit
+                  Save
                 </Text>
               </ImageBackground>
             </TouchableOpacity>
-            <Text style={[signinStyles.text, { color: "red" }]}>
-              {loginError}
-            </Text>
-            <Text
-              onPress={() => router.navigate("/signup")}
-              style={signinStyles.text}
-            >
-              Don't have an account? Click here to sign up.
-            </Text>
+            <Button title="Delete Group" onPress={handleDeleteGroup} />
           </View>
         </View>
       </View>

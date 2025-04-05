@@ -5,8 +5,8 @@ import { signupStyles } from "./signupStyles";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { addUser, getUsers } from "@/api/api";
+import { useMutation } from "@tanstack/react-query";
+import { addUser, getUserDetail, getUsers } from "@/api/api";
 import { useRouter } from "expo-router";
 
 interface FormData {
@@ -18,7 +18,18 @@ interface FormData {
   streak?: number;
   password: string;
 }
+
+interface NewUser {
+  first_name: string;
+  last_name: string;
+  username: string;
+  email: string;
+  points?: number;
+  streak?: number;
+  password: string;
+}
 interface User {
+  id: number;
   first_name: string;
   last_name: string;
   username: string;
@@ -29,9 +40,8 @@ interface User {
 }
 
 export default function SignUp() {
-  const { setUser } = useContext(AppContext);
+  const { setUser, setUserId } = useContext(AppContext);
   const [uniqueUserError, setUniqueUserError] = useState<string>("");
-  const queryClient = useQueryClient();
   const router = useRouter();
 
   const { mutateAsync: getUsersMutation, data: userData } = useMutation({
@@ -41,7 +51,7 @@ export default function SignUp() {
 
   const { mutateAsync: addUserMutation } = useMutation({
     mutationKey: ["SignUpAddUser"],
-    mutationFn: (user: User) => addUser(user),
+    mutationFn: (user: NewUser) => addUser(user),
   });
 
   const schema = yup.object().shape({
@@ -63,7 +73,6 @@ export default function SignUp() {
   const {
     control,
     handleSubmit,
-    setValue,
     formState: { errors },
   } = useForm({
     mode: "onSubmit",
@@ -85,8 +94,7 @@ export default function SignUp() {
       return;
     }
 
-    // TODO: Verify unique username
-    let data: User = {
+    let data: NewUser = {
       first_name: formData.firstName,
       last_name: formData.lastName,
       username: formData.username,
@@ -96,7 +104,11 @@ export default function SignUp() {
 
     await addUserMutation(data);
     setUser(data.username);
-    // TODO addUserutation.mutate(data);
+    users = await getUsers();
+    setUserId(
+      users.filter((u: User) => u.username === formData.username)[0].id
+    );
+    router.navigate("/home");
   };
 
   return (

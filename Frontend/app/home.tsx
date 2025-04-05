@@ -1,11 +1,11 @@
 import BottomBar from "@/components/BottomBar/BottomBar";
 import { homeStyles } from "./homeStyles";
-import { Text, View, StyleSheet} from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 import { useFonts } from "expo-font";
-import * as Location from 'expo-location';
-import { useEffect} from "react";
-import React from 'react'
-import MapView from 'react-native-maps'
+import * as Location from "expo-location";
+import { useEffect } from "react";
+import React from "react";
+import MapView from "react-native-maps";
 
 export default function Home() {
   const [fontsLoaded] = useFonts({
@@ -22,13 +22,13 @@ export default function Home() {
 
   const getUserLocation = async () => {
     const { status } = await Location.requestForegroundPermissionsAsync();
-    if (status !== 'granted') {
-      alert('Permission denied');
+    if (status !== "granted") {
+      alert("Permission denied");
       return;
     }
-  
+
     const location = await Location.getCurrentPositionAsync({});
-    console.log('User location:', location.coords);
+    console.log("User location:", location.coords);
     return location.coords; // contains latitude and longitude
   };
 
@@ -49,7 +49,6 @@ export default function Home() {
     <>
       <View style={homeStyles.bg}>
         <View style={homeStyles.bg}>
-
           <View style={homeStyles.view}>
             <View style={homeStyles.box}>
               <Text style={[homeStyles.timeText, { fontFamily: "Jersey10" }]}>

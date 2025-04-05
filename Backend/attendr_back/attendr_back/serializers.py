@@ -31,7 +31,7 @@ class UserSerializer(serializers.ModelSerializer):
 class DaySerializer(serializers.ModelSerializer):
     class Meta:
         model = Group
-        fields = ["id", "name"]
+        fields = ["id"]
 
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:

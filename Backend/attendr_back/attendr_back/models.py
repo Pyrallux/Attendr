@@ -35,7 +35,6 @@ class Day(models.Model):
         (7, "Sunday"),
     )
     id = models.IntegerField(choices=DAY_CHOICES, primary_key=True)
-    name = models.CharField(max_length=10) #not sure if I need a name parameter if 1-7 correspond to the days of the week
 
 class Course(models.Model): #tracking course data
     id = models.AutoField(primary_key=True)

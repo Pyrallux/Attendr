@@ -22,11 +22,12 @@ class User(models.Model):  # tracking user data
     points = models.BigIntegerField(blank=False, default=0)
     streak = models.BigIntegerField(blank=False, default=0)
 
+    def __str__(self):
+        return self.username
 
-class Course(models.Model):  # tracking course data
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100, blank=False, default="")
-    RECURRENCE_CHOICES = (
+
+class Day(models.Model):
+    DAY_CHOICES = (
         (1, "Monday"),
         (2, "Tuesday"),
         (3, "Wednesday"),
@@ -57,38 +58,10 @@ class Course(models.Model):  # tracking course data
     longitude = models.FloatField(blank=True, null=True)  # allow blank values
 
 
-# class CourseDay(models.Model):
-#     id = models.AutoField(primary_key=True)
-#     RECURRENCE_CHOICES = (
-#         (1, "Monday"),
-#         (2, "Tuesday"),
-#         (3, "Wednesday"),
-#         (4, "Thursday"),
-#         (5, "Friday"),
-#         (6, "Saturday"),
-#         (7, "Sunday"),
-#     )
-#     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="course_days") #make easier to reference later
-#     day = models.IntegerField(choices=RECURRENCE_CHOICES)
-
-
 class Group(models.Model):  # tracking group data
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100, blank=False, default="")
     members = models.ManyToManyField(User, related_name="groups")
 
-
-# class Attendance(models.Model): #track if users actually attend the course
-#     id = models.AutoField(primary_key=True)
-#     user = models.ForeignKey(User, on_delete=models.CASCADE) #each attendance record belongs to one user (many to one relation)
-#     course = models.ForeignKey(Course, on_delete=models.CASCADE) #each attendance record belongs to one course
-#     date = models.DateField()
-#     present = models.BooleanField(default=False)
-
-#     class Meta:
-#         unique_together = ('user', 'course', 'date') #make it so the user can only be tracked at one course per day
-
-# class Enrollment(models.Model): #track if uses are enrolled in a course
-#     id = models.AutoField(primary_key=True)
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.name

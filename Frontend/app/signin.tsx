@@ -17,31 +17,15 @@ export default function SignUp() {
         </View>
         <View style={signupStyles.content}>
           <View style={signupStyles.box}>
-            <Text style={signupStyles.header}>Sign Up</Text>
-            <TextInput
-              style={signupStyles.border}
-              maxLength={20}
-              placeholder="First Name"
-              onChangeText={(text) => setUserInput(text)}
-            ></TextInput>
-            <TextInput
-              style={signupStyles.border}
-              maxLength={20}
-              placeholder="Last Name"
-              onChangeText={(text) => setUserInput(text)}
-            ></TextInput>
+            <Text style={signupStyles.header}>Sign In</Text>
+
             <TextInput
               style={signupStyles.border}
               maxLength={20}
               placeholder="Username"
               onChangeText={(text) => setUserInput(text)}
             ></TextInput>
-            <TextInput
-              style={signupStyles.border}
-              maxLength={20}
-              placeholder="Email"
-              onChangeText={(text) => setUserInput(text)}
-            ></TextInput>
+
             <TextInput
               style={signupStyles.border}
               maxLength={20}

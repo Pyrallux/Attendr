@@ -16,7 +16,7 @@ class User(models.Model): #tracking user data
     first_name = models.CharField(max_length=100, blank=False, default="")
     last_name = models.CharField(max_length=100, blank=False, default="")
     username = models.CharField(max_length=100, blank=False, default="")
-    # Password -- do later
+    password = models.CharField(max_length=100, blank=False, default="")
     email = models.CharField(max_length=100, blank=False, default="")
     points = models.BigIntegerField(blank = False, default=0)
     streak = models.BigIntegerField(blank = False, default=0)

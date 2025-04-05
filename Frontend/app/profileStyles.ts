@@ -19,10 +19,12 @@ export const profileStyles = StyleSheet.create({
   },
   nameText: {
     color: "white",
-    fontSize: 24,
+    fontSize: 32,
+    fontFamily: "Jersey10",
   },
   usernameText: {
     color: "gray",
-    fontSize: 12,
+    fontSize: 16,
+    fontFamily: "Jersey10",
   },
 });

@@ -4,13 +4,14 @@ import { Text, View } from "react-native";
 
 import { useFonts } from "expo-font";
 
-const Home2 = () => {
-  let [fontsLoaded] = useFonts({
+export default function Home() {
+  const [fontsLoaded] = useFonts({
     Jersey10: require("./../assets/fonts/Jersey10-Regular.ttf"),
   });
-};
 
-export default function Home() {
+  if (!fontsLoaded) {
+    return undefined;
+  }
   return (
     <>
       <View style={homeStyles.bg}>

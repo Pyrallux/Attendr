@@ -42,7 +42,7 @@ export const homeStyles = StyleSheet.create({
 
   timeText: {
     color: "white",
-    fontSize: 24,
+    fontSize: 32,
     fontFamily: "Jersey10",
   },
 });

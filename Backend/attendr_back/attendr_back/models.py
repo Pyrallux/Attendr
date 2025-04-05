@@ -62,6 +62,7 @@ class Group(models.Model):  # tracking group data
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100, blank=False, default="")
     members = models.ManyToManyField(User, related_name="groups")
+    admin = models.CharField(max_length=100, blank=False, default="")
 
     def __str__(self):
         return self.name

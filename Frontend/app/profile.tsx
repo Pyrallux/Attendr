@@ -1,13 +1,30 @@
 import BottomBar from "@/components/BottomBar/BottomBar";
 import { profileStyles } from "./profileStyles";
 import { Text, View, Image, ScrollView } from "react-native";
-import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import { useFonts } from "expo-font";
+import { useContext, useEffect, useState } from "react";
+import { AppContext } from "./_layout";
+import { useMutation } from "@tanstack/react-query";
+import { getUserDetail } from "@/api/api";
 
 export default function Profile() {
   const [fontsLoaded] = useFonts({
     Jersey10: require("./../assets/fonts/Jersey10-Regular.ttf"),
   });
+  const { user, userId } = useContext(AppContext);
+  const [firstName, setFirstName] = useState<string>("Loading...");
+
+  const { mutateAsync: getUserDetailMutation } = useMutation({
+    mutationKey: ["SignInGetUserDetail"],
+    mutationFn: (id: number) => getUserDetail(id),
+    onSuccess: (data) => {
+      setFirstName(data.first_name);
+    },
+  });
+
+  useEffect(() => {
+    getUserDetailMutation(userId);
+  }, []);
 
   if (!fontsLoaded) {
     return undefined;
@@ -20,8 +37,8 @@ export default function Profile() {
             <Image
               source={require("../assets/images/placeHolderIcon.png")}
             ></Image>
-            <Text style={profileStyles.nameText}> Name</Text>;
-            <Text style={profileStyles.usernameText}> @username</Text>
+            <Text style={profileStyles.nameText}>{firstName}</Text>
+            <Text style={profileStyles.usernameText}>@{user}</Text>
           </View>
           <View style={[profileStyles.view, { paddingTop: 400 }]}>
             <View style={profileStyles.box}>

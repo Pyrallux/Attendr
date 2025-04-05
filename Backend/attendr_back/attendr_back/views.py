@@ -190,5 +190,93 @@ def group_detail(request, id, format=None):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+# #Attendance views
+# @api_view(["GET", "POST", "PUT", "DELETE"])
+# def attendance_list(request, format=None):
+#     if request.method == "GET":
+#         attendance = Attendance.objects.all()
+#         serializer = AttendanceSerializer(attendance, many=True)
+#         return Response(serializer.data)
+#     elif request.method == "POST":
+#         serializer = AttendanceSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#     elif request.method == "PUT":
+#         serializer = AttendanceSerializer(attendance, data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#     elif request.method == "DELETE":
+#         attendance = Attendance.objects.all()
+#         attendance.delete()
+#         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+# @api_view(["GET", "PUT", "DELETE"])
+# def attendance_detail(request, id, format=None):
+#     try:
+#         attendance = Attendance.objects.get(pk=id)
+#     except Attendance.DoesNotExist:
+#         return Response(status=status.HTTP_404_NOT_FOUND)
+
+#     if request.method == "GET":
+#         serializer = AttendanceSerializer(attendance)
+#         return Response(serializer.data)
+#     elif request.method == "PUT":
+#         serializer = AttendanceSerializer(attendance, data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#     elif request.method == "DELETE":
+#         attendance.delete()
+#         return Response(status=status.HTTP_204_NO_CONTENT)
     
 
+# #Enrollment views
+# @api_view(["GET", "POST", "PUT", "DELETE"])
+# def enrollment_list(request, format=None):
+#     if request.method == "GET":
+#         enrollment = Enrollment.objects.all()
+#         serializer = EnrollmentSerializer(enrollment, many=True)
+#         return Response(serializer.data)
+#     elif request.method == "POST":
+#         serializer = EnrollmentSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#     elif request.method == "PUT":
+#         serializer = EnrollmentSerializer(enrollment, data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#     elif request.method == "DELETE":
+#         enrollment = Enrollment.objects.all()
+#         enrollment.delete()
+#         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+# @api_view(["GET", "PUT", "DELETE"])
+# def enrollment_detail(request, id, format=None):
+#     try:
+#         enrollment = Enrollment.objects.get(pk=id)
+#     except Enrollment.DoesNotExist:
+#         return Response(status=status.HTTP_404_NOT_FOUND)
+
+#     if request.method == "GET":
+#         serializer = EnrollmentSerializer(enrollment)
+#         return Response(serializer.data)
+#     elif request.method == "PUT":
+#         serializer = EnrollmentSerializer(enrollment, data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#     elif request.method == "DELETE":
+#         enrollment.delete()
+#         return Response(status=status.HTTP_204_NO_CONTENT)

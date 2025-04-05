@@ -20,7 +20,7 @@ from .models import *
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
-        fields = ["id", "name", "frequency", "time", "start_date", "end_date"]
+        fields = ["id", "name", "frequency", "time", "start_date", "end_date", "user_id", "days_attended", "days_missed"]
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -31,3 +31,13 @@ class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Group
         fields = ["id", "name", "members"]
+
+# class AttendanceSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Attendance
+#         fields = ["id", "user", "course", "date", "present"]
+
+# class EnrollmentSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Enrollment
+#         fields = ["id", "user", "course"]

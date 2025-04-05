@@ -11,8 +11,20 @@ from django.db import models
 #     plant_warehouse = models.CharField(max_length=100, blank=True, default="")
 #     cycles_per_year = models.IntegerField(blank=True, default=0)
 
+class User(models.Model): #tracking user data
+    id = models.AutoField(primary_key=True)
+    first_name = models.CharField(max_length=100, blank=False, default="")
+    last_name = models.CharField(max_length=100, blank=False, default="")
+    username = models.CharField(max_length=100, blank=False, default="")
+    # Password -- do later
+    email = models.CharField(max_length=100, blank=False, default="")
+    points = models.BigIntegerField(blank = False, default=0)
+    streak = models.BigIntegerField(blank = False, default=0)
 
-class Course(models.Model):
+    def __init__(self):
+        return self.username
+
+class Course(models.Model): #tracking course data
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100, blank=False, default="")
     RECURRENCE_CHOICES = (
@@ -29,23 +41,12 @@ class Course(models.Model):
     time = models.TimeField("Lesson Time")
     start_date = models.DateField("Start Date")
     end_date = models.DateField("End Date")
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE) #tie user data to the course
+    days_attended = models.BigIntegerField(blank = False, default=0)
+    days_missed = models.BigIntegerField(blank = False, default=0)
     # location = 
 
-
-class User(models.Model):
-    id = models.AutoField(primary_key=True)
-    first_name = models.CharField(max_length=100, blank=False, default="")
-    last_name = models.CharField(max_length=100, blank=False, default="")
-    username = models.CharField(max_length=100, blank=False, default="")
-    email = models.CharField(max_length=100, blank=False, default="")
-    points = models.BigIntegerField(blank = False, default=0)
-    streak = models.BigIntegerField(blank = False, default=0)
-    # Password -- do later
-
-    def __init__(self):
-        return self.username
-
-class Group(models.Model):
+class Group(models.Model): #tracking group data
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100, blank=False, default="")
     members = models.ManyToManyField(User, related_name="groups")
@@ -53,4 +54,17 @@ class Group(models.Model):
     def __init__(self):
         return self.name
 
+# class Attendance(models.Model): #track if users actually attend the course
+#     id = models.AutoField(primary_key=True)
+#     user = models.ForeignKey(User, on_delete=models.CASCADE) #each attendance record belongs to one user (many to one relation)
+#     course = models.ForeignKey(Course, on_delete=models.CASCADE) #each attendance record belongs to one course
+#     date = models.DateField()
+#     present = models.BooleanField(default=False)
+
+#     class Meta:
+#         unique_together = ('user', 'course', 'date') #make it so the user can only be tracked at one course per day
     
+# class Enrollment(models.Model): #track if uses are enrolled in a course
+#     id = models.AutoField(primary_key=True) 
+#     user = models.ForeignKey(User, on_delete=models.CASCADE) 
+#     course = models.ForeignKey(Course, on_delete=models.CASCADE)

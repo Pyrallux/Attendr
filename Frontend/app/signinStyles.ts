@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const signupStyles = StyleSheet.create({
+export const signinStyles = StyleSheet.create({
   container: {
     justifyContent: "space-between",
   },
@@ -18,20 +18,23 @@ export const signupStyles = StyleSheet.create({
   },
   border: {
     borderBlockColor: "white",
-    borderWidth: 1,
+    borderWidth: 2,
     color: "white",
-    fontSize: 12,
+    fontSize: 24,
+    fontFamily: "Jersey10",
   },
   text: {
     color: "white",
-    fontSize: 12,
+    fontSize: 24,
+    fontFamily: "Jersey10",
   },
   header: {
     color: "white",
-    fontSize: 32,
+    fontSize: 48,
+    fontFamily: "Jersey10",
   },
   box: {
-    height: 750,
+    height: 800,
     width: "100%",
     backgroundColor: "#292929",
     justifyContent: "center",
@@ -48,8 +51,8 @@ export const signupStyles = StyleSheet.create({
   },
   logoText: {
     color: "white",
-    fontSize: 32,
+    fontSize: 64,
     paddingTop: 80,
-    fontFamily: "",
+    fontFamily: "Jersey10",
   },
 });

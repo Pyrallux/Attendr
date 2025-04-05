@@ -1,13 +1,14 @@
 import { Text, View, TextInput, Button } from "react-native";
 import { useContext, useState } from "react";
 import { AppContext } from "./_layout";
-import { signupStyles } from "./signupStyles";
+import { signinStyles } from "./signinStyles";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { getUsers } from "@/api/api";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "expo-router";
+import { useFonts } from "expo-font";
 
 interface User {
   first_name: string;
@@ -73,42 +74,55 @@ export default function SignIn() {
     setUser(formData.username);
   };
 
+  const [fontsLoaded] = useFonts({
+    Jersey10: require("./../assets/fonts/Jersey10-Regular.ttf"),
+  });
+
+  if (!fontsLoaded) {
+    return undefined;
+  }
+
   return (
     <>
-      <View style={signupStyles.bg}>
-        <View style={signupStyles.logo}>
-          <Text style={signupStyles.logoText}>Attendr</Text>
+      <View style={signinStyles.bg}>
+        <View style={signinStyles.logo}>
+          <Text style={[signinStyles.logoText, { fontFamily: "Jersey10" }]}>
+            Attendr
+          </Text>
         </View>
-        <View style={signupStyles.content}>
-          <View style={signupStyles.box}>
-            <Text style={signupStyles.header}>Sign Up</Text>
+        <View style={signinStyles.content}>
+          <View style={signinStyles.box}>
+            <Text style={[signinStyles.header, { fontFamily: "Jersey10" }]}>
+              Sign In
+            </Text>
 
-            <Text>First Name</Text>
-
-            <Text>Username</Text>
+            <Text style={signinStyles.text}>Username</Text>
             <Controller
               control={control}
               name="username"
               render={({ field: { onChange, value } }) => (
                 <TextInput
-                  style={signupStyles.border}
+                  style={signinStyles.border}
                   placeholder="doejohn2004"
+                  placeholderTextColor="gray"
                   onChangeText={onChange}
                   value={value}
                 />
               )}
             />
             {errors.username && (
-              <Text style={{ color: "red" }}>{errors.username.message}</Text>
+              <Text style={[signinStyles.text, { color: "red" }]}>
+                {errors.username.message}
+              </Text>
             )}
 
-            <Text>Password</Text>
+            <Text style={signinStyles.text}>Password</Text>
             <Controller
               control={control}
               name="password"
               render={({ field: { onChange, value } }) => (
                 <TextInput
-                  style={signupStyles.border}
+                  style={signinStyles.border}
                   secureTextEntry={true}
                   onChangeText={onChange}
                   value={value}
@@ -116,12 +130,17 @@ export default function SignIn() {
               )}
             />
             {errors.password && (
-              <Text style={{ color: "red" }}>{errors.password.message}</Text>
+              <Text style={[signinStyles.text, { color: "red" }]}>{errors.password.message}</Text>
             )}
 
             <Button onPress={handleSubmit(onSubmit)} title="submit"></Button>
-            <Text style={{ color: "red" }}>{loginError}</Text>
-            <Text onPress={() => router.navigate("/signup")}>
+            <Text style={[signinStyles.text, { color: "red" }]}>
+              {loginError}
+            </Text>
+            <Text
+              onPress={() => router.navigate("/signup")}
+              style={signinStyles.text}
+            >
               Don't have an account? Click here to sign up.
             </Text>
           </View>

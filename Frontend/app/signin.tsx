@@ -1,4 +1,11 @@
-import { Text, View, TextInput, Button } from "react-native";
+import {
+  Text,
+  View,
+  TextInput,
+  Button,
+  TouchableOpacity,
+  ImageBackground,
+} from "react-native";
 import { useContext, useState } from "react";
 import { AppContext } from "./_layout";
 import { signinStyles } from "./signinStyles";
@@ -130,10 +137,39 @@ export default function SignIn() {
               )}
             />
             {errors.password && (
-              <Text style={[signinStyles.text, { color: "red" }]}>{errors.password.message}</Text>
+              <Text style={[signinStyles.text, { color: "red" }]}>
+                {errors.password.message}
+              </Text>
             )}
 
-            <Button onPress={handleSubmit(onSubmit)} title="submit"></Button>
+            <TouchableOpacity
+              onPress={() => {
+                handleSubmit(onSubmit)();
+              }}
+              style={{ marginTop: 20 }}
+            >
+              <ImageBackground
+                source={require("./../assets/images/submitButton.png")} // replace with your actual path
+                style={{
+                  width: 200,
+                  height: 60,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+                imageStyle={{ borderRadius: 10 }} // optional rounded corners
+              >
+                <Text
+                  style={{
+                    color: "white",
+                    fontSize: 20,
+                    fontFamily: "Jersey10",
+                    paddingBottom: 10,
+                  }}
+                >
+                  Submit
+                </Text>
+              </ImageBackground>
+            </TouchableOpacity>
             <Text style={[signinStyles.text, { color: "red" }]}>
               {loginError}
             </Text>

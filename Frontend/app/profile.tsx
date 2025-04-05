@@ -1,20 +1,20 @@
 import BottomBar from "@/components/BottomBar/BottomBar";
+import { profileStyles } from "./profileStyles";
 import { Text, View, Image } from "react-native";
 
-export default function Home() {
+export default function Profile() {
   return (
-    <>
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Image source={require("../assets/images/favicon.png")}></Image>
-        <Text>Edit app/index.tsx to edit this penis.</Text>
+    <View style={profileStyles.bg}>
+      <View style={profileStyles.container}>
+        <View style={profileStyles.content}>
+          <Image
+            source={require("../assets/images/placeHolderIcon.png")}
+          ></Image>
+          <Text style={profileStyles.nameText}> Name</Text>
+          <Text style={profileStyles.usernameText}> @username</Text>
+        </View>
       </View>
       <BottomBar />
-    </>
+    </View>
   );
 }

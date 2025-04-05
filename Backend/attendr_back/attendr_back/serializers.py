@@ -32,7 +32,7 @@ class GroupSerializer(serializers.ModelSerializer):
         model = Group
         fields = ["id", "name", "members"]
 
-class CourseDaySerializer(serializers.ModelSerializer)
+class CourseDaySerializer(serializers.ModelSerializer):
     class Meta:
         model = CourseDay
         fields = ["id", "course", "day"]

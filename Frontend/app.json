@@ -36,6 +36,15 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "2b60de99-678e-4574-bd83-f6e6e6b13c68"
+      }
+    },
+    "owner": "pyrallux"
   }
 }

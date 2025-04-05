@@ -17,7 +17,7 @@ class User(models.Model):  # tracking user data
     first_name = models.CharField(max_length=100, blank=False, default="")
     last_name = models.CharField(max_length=100, blank=False, default="")
     username = models.CharField(max_length=100, blank=False, default="")
-    # Password -- do later
+    password = models.CharField(max_length=100, blank=False, default="")
     email = models.CharField(max_length=100, blank=False, default="")
     points = models.BigIntegerField(blank=False, default=0)
     streak = models.BigIntegerField(blank=False, default=0)
@@ -35,17 +35,41 @@ class Course(models.Model):  # tracking course data
         (6, "Saturday"),
         (7, "Sunday"),
     )
+    id = models.IntegerField(choices=DAY_CHOICES, primary_key=True)
 
-    frequency = models.IntegerField(choices=RECURRENCE_CHOICES)
+
+class Course(models.Model):  # tracking course data
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100, blank=False, default="")
     time = models.TimeField("Lesson Time")
     start_date = models.DateField("Start Date")
     end_date = models.DateField("End Date")
     user_id = models.ForeignKey(
         User, on_delete=models.CASCADE
     )  # tie user data to the course
+    days = models.ManyToManyField(Day, related_name="courses")
     days_attended = models.BigIntegerField(blank=False, default=0)
     days_missed = models.BigIntegerField(blank=False, default=0)
-    # location =
+    # Location -- Negative numbers correspond to S,W
+    latitude = models.FloatField(
+        blank=True, null=True
+    )  # allow empty values to be stored as null in DB
+    longitude = models.FloatField(blank=True, null=True)  # allow blank values
+
+
+# class CourseDay(models.Model):
+#     id = models.AutoField(primary_key=True)
+#     RECURRENCE_CHOICES = (
+#         (1, "Monday"),
+#         (2, "Tuesday"),
+#         (3, "Wednesday"),
+#         (4, "Thursday"),
+#         (5, "Friday"),
+#         (6, "Saturday"),
+#         (7, "Sunday"),
+#     )
+#     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="course_days") #make easier to reference later
+#     day = models.IntegerField(choices=RECURRENCE_CHOICES)
 
 
 class Group(models.Model):  # tracking group data

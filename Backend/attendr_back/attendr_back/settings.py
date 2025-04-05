@@ -38,6 +38,7 @@ CSRF_TRUSTED_ORIGINS = [
 ALLOWED_HOSTS = [
     "localhost",
     "balls.webhop.me",
+    "127.0.0.1"
 ]
 
 

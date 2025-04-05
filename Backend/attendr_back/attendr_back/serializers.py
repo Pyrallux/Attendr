@@ -18,20 +18,31 @@ from .models import *
 
 
 class CourseSerializer(serializers.ModelSerializer):
+    days = serializers.PrimaryKeyRelatedField(many=True, queryset=Day.objects.all())
     class Meta:
         model = Course
-        fields = ["id", "name", "frequency", "time", "start_date", "end_date", "user_id", "days_attended", "days_missed"]
+        fields = ["id", "name", "frequency", "time", "start_date", "end_date", "user_id", "days_attended", "days_missed", "latitude", "longitude"]
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["id", "first_name", "last_name", "username", "email", "points", "streak"]
+        fields = ["id", "first_name", "last_name", "username","password", "email", "points", "streak"]
+
+class DaySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Group
+        fields = ["id"]
 
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Group
         fields = ["id", "name", "members"]
 
+# class CourseDaySerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = CourseDay
+#         fields = ["id", "course", "day"]
+    
 # class AttendanceSerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = Attendance

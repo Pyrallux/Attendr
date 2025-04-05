@@ -1,25 +1,16 @@
 import BottomBar from "@/components/BottomBar/BottomBar";
+import { groupsStyles } from "./groupsStyles";
 import { Text, View } from "react-native";
 
 export default function Groups() {
   // Use Virtualized List
+
   return (
-    <>
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Text>This is a group.</Text>
-        <Text>This is a group.</Text>
-        <Text>This is a group.</Text>
-        <Text>This is a group.</Text>
-        <Text>This is a group.</Text>
-        <Text>This is a group.</Text>
+    <View style={groupsStyles.bg}>
+      <View style={groupsStyles.container}>
+        <View style={groupsStyles.content}></View>
       </View>
       <BottomBar />
-    </>
+    </View>
   );
 }

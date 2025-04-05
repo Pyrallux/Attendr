@@ -10,7 +10,6 @@ export default function Groups() {
       <View style={groupsStyles.container}>
         <View style={groupsStyles.content}></View>
       </View>
-      <BottomBar />
     </View>
   );
 }

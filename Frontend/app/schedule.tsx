@@ -13,7 +13,6 @@ export default function Schedule() {
       >
         <Text>Think about how this will work later.</Text>
       </View>
-      <BottomBar />
     </>
   );
 }

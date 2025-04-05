@@ -35,7 +35,7 @@ export default function SignIn() {
         placeholder="Password"
         onChangeText={(text) => setUserInput(text)}
       ></TextInput>
-      <Button onPress={handleSubmit} title="submit"></Button>
+      <Button onPress={handleSubmit} title="Sign In"></Button>
     </>
   );
 }

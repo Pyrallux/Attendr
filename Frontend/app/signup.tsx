@@ -1,4 +1,12 @@
-import { Text, View, TextInput, Button } from "react-native";
+import {
+  Text,
+  View,
+  TextInput,
+  Button,
+  TouchableOpacity,
+  ImageBackground,
+  ScrollView,
+} from "react-native";
 import { useContext, useState } from "react";
 import { AppContext } from "./_layout";
 import { signupStyles } from "./signupStyles";
@@ -8,6 +16,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addUser, getUsers } from "@/api/api";
 import { useRouter } from "expo-router";
+import { useFonts } from "expo-font";
 
 interface FormData {
   firstName: string;
@@ -46,12 +55,12 @@ export default function SignUp() {
 
   const schema = yup.object().shape({
     firstName: yup.string().max(40).required("*First Name is Required"),
-    lastName: yup.string().max(40).required("*First Name is Required"),
-    username: yup.string().max(20).required("*Email is Required"),
+    lastName: yup.string().max(40).required("*Last Name is Required"),
+    username: yup.string().max(20).required("*Username is Required"),
     email: yup
       .string()
       .email("*Invalid Email Provided")
-      .required("*First Name is Required"),
+      .required("*Email Name is Required"),
     password: yup
       .string()
       .min(5, "*Password must contain and least five characters")
@@ -99,127 +108,200 @@ export default function SignUp() {
     // TODO addUserutation.mutate(data);
   };
 
+  const [fontsLoaded] = useFonts({
+    Jersey10: require("./../assets/fonts/Jersey10-Regular.ttf"),
+  });
+
+  if (!fontsLoaded) {
+    return undefined;
+  }
+  const [isPressed, setIsPressed] = useState(false);
+
+  const handlePress = () => {
+    setTimeout(() => setIsPressed(false), 75);
+  };
+
   return (
     <>
-      <View style={signupStyles.bg}>
-        <View style={signupStyles.logo}>
-          <Text style={signupStyles.logoText}>Attendr</Text>
-        </View>
-        <View style={signupStyles.content}>
-          <View style={signupStyles.box}>
-            <Text style={signupStyles.header}>Sign Up</Text>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <View style={signupStyles.bg}>
+          <View style={signupStyles.logo}>
+            <Text style={signupStyles.logoText}>Attendr</Text>
+          </View>
+          <View style={signupStyles.content}>
+            <View style={[signupStyles.box]}>
+              <Text style={signupStyles.header}>Sign Up</Text>
 
-            <Text>First Name</Text>
-            <Controller
-              control={control}
-              name="firstName"
-              render={({ field: { onChange, value } }) => (
-                <TextInput
-                  style={signupStyles.border}
-                  placeholder="John"
-                  onChangeText={onChange}
-                  value={value}
-                />
+              <Text style={signupStyles.text}>First Name</Text>
+              <Controller
+                control={control}
+                name="firstName"
+                render={({ field: { onChange, value } }) => (
+                  <TextInput
+                    style={signupStyles.border}
+                    placeholder="John"
+                    placeholderTextColor="gray"
+                    onChangeText={onChange}
+                    value={value}
+                  />
+                )}
+              />
+              {errors.firstName && (
+                <Text style={[signupStyles.text, { color: "red" }]}>
+                  {errors.firstName.message}
+                </Text>
               )}
-            />
-            {errors.firstName && (
-              <Text style={{ color: "red" }}>{errors.firstName.message}</Text>
-            )}
 
-            <Text>Last Name</Text>
-            <Controller
-              control={control}
-              name="lastName"
-              render={({ field: { onChange, value } }) => (
-                <TextInput
-                  style={signupStyles.border}
-                  placeholder="Doe"
-                  onChangeText={onChange}
-                  value={value}
-                />
+              <Text style={signupStyles.text}>Last Name</Text>
+              <Controller
+                control={control}
+                name="lastName"
+                render={({ field: { onChange, value } }) => (
+                  <TextInput
+                    style={signupStyles.border}
+                    placeholder="Doe"
+                    placeholderTextColor="gray"
+                    onChangeText={onChange}
+                    value={value}
+                  />
+                )}
+              />
+              {errors.lastName && (
+                <Text
+                  style={[signupStyles.text, { color: "red", marginTop: 5 }]}
+                >
+                  {errors.lastName.message}
+                </Text>
               )}
-            />
-            {errors.lastName && (
-              <Text style={{ color: "red" }}>{errors.lastName.message}</Text>
-            )}
 
-            <Text>Username</Text>
-            <Controller
-              control={control}
-              name="username"
-              render={({ field: { onChange, value } }) => (
-                <TextInput
-                  style={signupStyles.border}
-                  placeholder="doejohn2004"
-                  onChangeText={onChange}
-                  value={value}
-                />
+              <Text style={signupStyles.text}>Username</Text>
+              <Controller
+                control={control}
+                name="username"
+                render={({ field: { onChange, value } }) => (
+                  <TextInput
+                    style={signupStyles.border}
+                    placeholder="doejohn2004"
+                    placeholderTextColor="gray"
+                    onChangeText={onChange}
+                    value={value}
+                  />
+                )}
+              />
+              {errors.username && (
+                <Text style={[signupStyles.text, { color: "red" }]}>
+                  {errors.username.message}
+                </Text>
               )}
-            />
-            {errors.username && (
-              <Text style={{ color: "red" }}>{errors.username.message}</Text>
-            )}
 
-            <Text>Email</Text>
-            <Controller
-              control={control}
-              name="email"
-              render={({ field: { onChange, value } }) => (
-                <TextInput
-                  style={signupStyles.border}
-                  placeholder="john.doe@example.com"
-                  onChangeText={onChange}
-                  value={value}
-                />
+              <Text style={signupStyles.text}>Email</Text>
+              <Controller
+                control={control}
+                name="email"
+                render={({ field: { onChange, value } }) => (
+                  <TextInput
+                    style={signupStyles.border}
+                    placeholder="john.doe@example.com"
+                    placeholderTextColor="gray"
+                    onChangeText={onChange}
+                    value={value}
+                  />
+                )}
+              />
+              {errors.email && (
+                <Text style={[signupStyles.text, { color: "red" }]}>
+                  {errors.email.message}
+                </Text>
               )}
-            />
-            {errors.email && (
-              <Text style={{ color: "red" }}>{errors.email.message}</Text>
-            )}
 
-            <Text>Password</Text>
-            <Controller
-              control={control}
-              name="password"
-              render={({ field: { onChange, value } }) => (
-                <TextInput
-                  style={signupStyles.border}
-                  secureTextEntry={true}
-                  onChangeText={onChange}
-                  value={value}
-                />
+              <Text style={signupStyles.text}>Password</Text>
+              <Controller
+                control={control}
+                name="password"
+                render={({ field: { onChange, value } }) => (
+                  <TextInput
+                    style={signupStyles.border}
+                    secureTextEntry={true}
+                    onChangeText={onChange}
+                    value={value}
+                  />
+                )}
+              />
+              {errors.password && (
+                <Text style={[signupStyles.text, { color: "red" }]}>
+                  {errors.password.message}
+                </Text>
               )}
-            />
-            {errors.password && (
-              <Text style={{ color: "red" }}>{errors.password.message}</Text>
-            )}
 
-            <Text>Confirm Password</Text>
-            <Controller
-              control={control}
-              name="passwordConfirmation"
-              render={({ field: { onChange, value } }) => (
-                <TextInput
-                  style={signupStyles.border}
-                  secureTextEntry={true}
-                  onChangeText={onChange}
-                  value={value}
-                />
+              <Text style={signupStyles.text}>Confirm Password</Text>
+              <Controller
+                control={control}
+                name="passwordConfirmation"
+                render={({ field: { onChange, value } }) => (
+                  <TextInput
+                    style={signupStyles.border}
+                    secureTextEntry={true}
+                    onChangeText={onChange}
+                    value={value}
+                  />
+                )}
+              />
+              {errors.passwordConfirmation && (
+                <Text style={[signupStyles.text, { color: "red" }]}>
+                  {errors.passwordConfirmation.message}
+                </Text>
               )}
-            />
-            {errors.passwordConfirmation && (
-              <Text style={{ color: "red" }}>
-                {errors.passwordConfirmation.message}
+              <TouchableOpacity
+                onPressIn={() => setIsPressed(true)}
+                onPressOut={() => {
+                  setIsPressed(false);
+                }}
+                onPress={() => {
+                  handleSubmit(onSubmit)();
+                  handlePress();
+                  setIsPressed(true);
+                }}
+                style={{ marginTop: 20 }}
+              >
+                <ImageBackground
+                  source={
+                    isPressed
+                      ? require("./../assets/images/submitButton2.png")
+                      : require("./../assets/images/submitButton.png")
+                  }
+                  style={{
+                    width: 200,
+                    height: 60,
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                  imageStyle={{ borderRadius: 10 }}
+                >
+                  <Text
+                    style={{
+                      color: "white",
+                      fontSize: 20,
+                      fontFamily: "Jersey10",
+                      transform: [{ translateY: isPressed ? 10 : -5 }],
+                    }}
+                  >
+                    Submit
+                  </Text>
+                </ImageBackground>
+              </TouchableOpacity>
+              <Text style={[signupStyles.text, { color: "red" }]}>
+                {uniqueUserError}
               </Text>
-            )}
-            <Button onPress={handleSubmit(onSubmit)} title="submit"></Button>
-            <Text style={{ color: "red" }}>{uniqueUserError}</Text>
-            <Text onPress={() => router.navigate("/signin")}>
-              Already have an account? Click here to sign in.
-            </Text>
+              <Text
+                onPress={() => router.navigate("/signin")}
+                style={signupStyles.text}
+              >
+                Already have an account? Click here to sign in.
+              </Text>
+            </View>
           </View>
         </View>
-      </View>
+      </ScrollView>
     </>
   );
 }

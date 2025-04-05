@@ -27,15 +27,20 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ["id", "first_name", "last_name", "username", "email", "points", "streak"]
 
+class DaySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Group
+        fields = ["id", "name"]
+
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Group
         fields = ["id", "name", "members"]
 
-class CourseDaySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CourseDay
-        fields = ["id", "course", "day"]
+# class CourseDaySerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = CourseDay
+#         fields = ["id", "course", "day"]
     
 # class AttendanceSerializer(serializers.ModelSerializer):
 #     class Meta:

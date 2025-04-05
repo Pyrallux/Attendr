@@ -11,21 +11,22 @@ from django.db import models
 #     plant_warehouse = models.CharField(max_length=100, blank=True, default="")
 #     cycles_per_year = models.IntegerField(blank=True, default=0)
 
-class User(models.Model): #tracking user data
+
+class User(models.Model):  # tracking user data
     id = models.AutoField(primary_key=True)
     first_name = models.CharField(max_length=100, blank=False, default="")
     last_name = models.CharField(max_length=100, blank=False, default="")
     username = models.CharField(max_length=100, blank=False, default="")
     password = models.CharField(max_length=100, blank=False, default="")
     email = models.CharField(max_length=100, blank=False, default="")
-    points = models.BigIntegerField(blank = False, default=0)
-    streak = models.BigIntegerField(blank = False, default=0)
+    points = models.BigIntegerField(blank=False, default=0)
+    streak = models.BigIntegerField(blank=False, default=0)
 
-    def __str__(self):
-        return self.username
 
-class Day(models.Model):
-    DAY_CHOICES = (
+class Course(models.Model):  # tracking course data
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100, blank=False, default="")
+    RECURRENCE_CHOICES = (
         (1, "Monday"),
         (2, "Tuesday"),
         (3, "Wednesday"),
@@ -36,27 +37,32 @@ class Day(models.Model):
     )
     id = models.IntegerField(choices=DAY_CHOICES, primary_key=True)
 
-class Course(models.Model): #tracking course data
+
+class Course(models.Model):  # tracking course data
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100, blank=False, default="")
     time = models.TimeField("Lesson Time")
     start_date = models.DateField("Start Date")
     end_date = models.DateField("End Date")
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE) #tie user data to the course
+    user_id = models.ForeignKey(
+        User, on_delete=models.CASCADE
+    )  # tie user data to the course
     days = models.ManyToManyField(Day, related_name="courses")
-    days_attended = models.BigIntegerField(blank = False, default=0)
-    days_missed = models.BigIntegerField(blank = False, default=0)
-    #Location -- Negative numbers correspond to S,W 
-    latitude = models.FloatField(blank=True, null=True) #allow empty values to be stored as null in DB
-    longitude = models.FloatField(blank=True, null=True) #allow blank values
+    days_attended = models.BigIntegerField(blank=False, default=0)
+    days_missed = models.BigIntegerField(blank=False, default=0)
+    # Location -- Negative numbers correspond to S,W
+    latitude = models.FloatField(
+        blank=True, null=True
+    )  # allow empty values to be stored as null in DB
+    longitude = models.FloatField(blank=True, null=True)  # allow blank values
 
 
-class Group(models.Model): #tracking group data
+
+
+class Group(models.Model):  # tracking group data
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100, blank=False, default="")
     members = models.ManyToManyField(User, related_name="groups")
     admin = models.CharField(max_length=100, blank=False, default="")
 
-    def __str__(self):
-        return self.name
 

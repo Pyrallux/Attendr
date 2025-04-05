@@ -21,3 +21,13 @@ class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
         fields = ["id", "name", "frequency", "time", "start_date", "end_date"]
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["id", "first_name", "last_name", "username", "email", "points", "streak"]
+
+class GroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Group
+        fields = ["id", "name", "members"]

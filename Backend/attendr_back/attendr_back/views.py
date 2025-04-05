@@ -52,12 +52,12 @@ from rest_framework import status
 #         warehouse.delete()
 #         return Response(status=status.HTTP_204_NO_CONTENT)
 
-
+#Course views
 @api_view(["GET", "POST", "PUT", "DELETE"])
 def course_list(request, format=None):
     if request.method == "GET":
-        courses = Course.objects.all()
-        serializer = CourseSerializer(courses, many=True)
+        course = Course.objects.all()
+        serializer = CourseSerializer(course, many=True)
         return Response(serializer.data)
     elif request.method == "POST":
         serializer = CourseSerializer(data=request.data)
@@ -96,3 +96,99 @@ def course_detail(request, id, format=None):
     elif request.method == "DELETE":
         course.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+#User views
+@api_view(["GET", "POST", "PUT", "DELETE"])
+def user_list(request, format=None):
+    if request.method == "GET":
+        user = User.objects.all()
+        serializer = UserSerializer(user, many=True)
+        return Response(serializer.data)
+    elif request.method == "POST":
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == "PUT":
+        serializer = UserSerializer(user, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == "DELETE":
+        user = User.objects.all()
+        user.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(["GET", "PUT", "DELETE"])
+def user_detail(request, id, format=None):
+    try:
+        user = User.objects.get(pk=id)
+    except User.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == "GET":
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
+    elif request.method == "PUT":
+        serializer = UserSerializer(user, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == "DELETE":
+        user.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+#Group views
+@api_view(["GET", "POST", "PUT", "DELETE"])
+def group_list(request, format=None):
+    if request.method == "GET":
+        group = Group.objects.all()
+        serializer = GroupSerializer(group, many=True)
+        return Response(serializer.data)
+    elif request.method == "POST":
+        serializer = GroupSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == "PUT":
+        serializer = GroupSerializer(group, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == "DELETE":
+        group = Group.objects.all()
+        group.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(["GET", "PUT", "DELETE"])
+def group_detail(request, id, format=None):
+    try:
+        group = Group.objects.get(pk=id)
+    except Group.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == "GET":
+        serializer = GroupSerializer(group)
+        return Response(serializer.data)
+    elif request.method == "PUT":
+        serializer = GroupSerializer(group, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == "DELETE":
+        group.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+    
+

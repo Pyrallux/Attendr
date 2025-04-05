@@ -46,6 +46,7 @@ class Course(models.Model): #tracking course data
     days = models.ManyToManyField(Day, related_name="courses")
     days_attended = models.BigIntegerField(blank = False, default=0)
     days_missed = models.BigIntegerField(blank = False, default=0)
+    #Location -- Negative numbers correspond to S,W 
     latitude = models.FloatField(blank=True, null=True) #allow empty values to be stored as null in DB
     longitude = models.FloatField(blank=True, null=True) #allow blank values
 

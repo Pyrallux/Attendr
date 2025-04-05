@@ -17,9 +17,12 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
+from . import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     # path("db/warehouses/", views.warehouse_list),
     # path("db/warehouses/<int:id>", views.warehouse_detail),
+    path("db/courses/", views.course_list),
+    path("db/courses/<int:id>", views.course_detail),
 ]

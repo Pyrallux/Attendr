@@ -55,4 +55,5 @@ export const signinStyles = StyleSheet.create({
     paddingTop: 80,
     fontFamily: "Jersey10",
   },
+  logoandtitle: {},
 });

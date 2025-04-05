@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ImageBackground,
   ScrollView,
+  Image,
 } from "react-native";
 import { useContext, useState } from "react";
 import { AppContext } from "./_layout";
@@ -125,8 +126,12 @@ export default function SignUp() {
     <>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <View style={signupStyles.bg}>
-          <View style={signupStyles.logo}>
+          <View style={[signupStyles.logo, { flexDirection: "row" }]}>
             <Text style={signupStyles.logoText}>Attendr</Text>
+            <Image
+              style={{ marginTop: 50, marginLeft: 5 }}
+              source={require("./../assets/images/LOGO.png")}
+            ></Image>
           </View>
           <View style={signupStyles.content}>
             <View style={[signupStyles.box]}>

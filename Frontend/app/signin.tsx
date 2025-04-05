@@ -5,6 +5,7 @@ import {
   Button,
   TouchableOpacity,
   ImageBackground,
+  Image,
 } from "react-native";
 import { useContext, useState } from "react";
 import { AppContext } from "./_layout";
@@ -98,10 +99,14 @@ export default function SignIn() {
   return (
     <>
       <View style={signinStyles.bg}>
-        <View style={signinStyles.logo}>
+        <View style={[signinStyles.logo, { flexDirection: "row" }]}>
           <Text style={[signinStyles.logoText, { fontFamily: "Jersey10" }]}>
             Attendr
           </Text>
+          <Image
+            style={{ marginTop: 50, marginLeft: 5 }}
+            source={require("./../assets/images/LOGO.png")}
+          ></Image>
         </View>
         <View style={signinStyles.content}>
           <View style={signinStyles.box}>

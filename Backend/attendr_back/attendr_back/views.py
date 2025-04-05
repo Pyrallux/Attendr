@@ -188,6 +188,51 @@ def group_detail(request, id, format=None):
     elif request.method == "DELETE":
         group.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
+#CourseDay views
+@api_view(["GET", "POST", "PUT", "DELETE"])
+def courseday_list(request, format=None):
+    if request.method == "GET":
+        courseday = CourseDay.objects.all()
+        serializer = CourseDaySerializer(courseday, many=True)
+        return Response(serializer.data)
+    elif request.method == "POST":
+        serializer = CourseDaySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == "PUT":
+        serializer = CourseDaySerializer(courseday, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == "DELETE":
+        courseday = CourseDay.objects.all()
+        courseday.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(["GET", "PUT", "DELETE"])
+def courseday_detail(request, id, format=None):
+    try:
+        courseday = CourseDay.objects.get(pk=id)
+    except CourseDay.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == "GET":
+        serializer = CourseDaySerializer(courseday)
+        return Response(serializer.data)
+    elif request.method == "PUT":
+        serializer = CourseDaySerializer(courseday, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == "DELETE":
+        courseday.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 # #Attendance views

@@ -29,6 +29,8 @@ urlpatterns = [
     path("db/users/<int:id>", views.user_detail),
     path("db/groups/", views.group_list),
     path("db/groups/<int:id>", views.group_detail),
+    path("db/coursedays/", views.courseday_list),
+    path("db/coursedays/<int:id>", views.courseday_detail),
     # path("db/attendances/", views.attendance_list),
     # path("db/attendances/<int:id>", views.attendance_detail),
     # path("db/enrollments/", views.enrollment_list),

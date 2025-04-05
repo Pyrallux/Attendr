@@ -34,6 +34,7 @@ CSRF_TRUSTED_ORIGINS = ["http://localhost:8000", "http://balls.webhop.me:8000"]
 ALLOWED_HOSTS = [
     "localhost",
     "balls.webhop.me",
+    "127.0.0.1"
 ]
 
 # Application definition

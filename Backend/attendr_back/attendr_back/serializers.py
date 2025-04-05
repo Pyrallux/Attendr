@@ -15,3 +15,9 @@ from .models import *
 #             "plant_warehouse",
 #             "cycles_per_year",
 #         ]
+
+
+class CourseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Course
+        fields = ["id", "name", "frequency", "time", "start_date", "end_date"]

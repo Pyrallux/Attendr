@@ -18,9 +18,10 @@ from .models import *
 
 
 class CourseSerializer(serializers.ModelSerializer):
+    days = serializers.PrimaryKeyRelatedField(many=True, queryset=Day.objects.all())
     class Meta:
         model = Course
-        fields = ["id", "name", "frequency", "time", "start_date", "end_date", "user_id", "days_attended", "days_missed"]
+        fields = ["id", "name", "frequency", "time", "start_date", "end_date", "user_id", "days_attended", "days_missed", "latitude", "longitude"]
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:

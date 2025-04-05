@@ -21,7 +21,7 @@ class User(models.Model): #tracking user data
     points = models.BigIntegerField(blank = False, default=0)
     streak = models.BigIntegerField(blank = False, default=0)
 
-    def __init__(self):
+    def __str__(self):
         return self.username
 
 class Day(models.Model):
@@ -35,7 +35,7 @@ class Day(models.Model):
         (7, "Sunday"),
     )
     id = models.IntegerField(choices=DAY_CHOICES, primary_key=True)
-    name = models.CharField(max_length=10)
+    name = models.CharField(max_length=10) #not sure if I need a name parameter if 1-7 correspond to the days of the week
 
 class Course(models.Model): #tracking course data
     id = models.AutoField(primary_key=True)
@@ -47,7 +47,8 @@ class Course(models.Model): #tracking course data
     days = models.ManyToManyField(Day, related_name="courses")
     days_attended = models.BigIntegerField(blank = False, default=0)
     days_missed = models.BigIntegerField(blank = False, default=0)
-    # location = 
+    latitude = models.FloatField(blank=True, null=True) #allow empty values to be stored as null in DB
+    longitude = models.FloatField(blank=True, null=True) #allow blank values
 
 # class CourseDay(models.Model):
 #     id = models.AutoField(primary_key=True)
@@ -68,7 +69,7 @@ class Group(models.Model): #tracking group data
     name = models.CharField(max_length=100, blank=False, default="")
     members = models.ManyToManyField(User, related_name="groups")
 
-    def __init__(self):
+    def __str__(self):
         return self.name
 
 # class Attendance(models.Model): #track if users actually attend the course

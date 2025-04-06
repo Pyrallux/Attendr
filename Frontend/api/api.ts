@@ -20,6 +20,20 @@ interface Group {
   admin: string;
 }
 
+interface Course {
+  id?: number;
+  name: string;
+  time: string;
+  start_date: Date;
+  end_date: Date;
+  user_id: number;
+  days: number[];
+  days_attended: number;
+  days_missed: number;
+  latitude: number;
+  longitude: number;
+}
+
 const api = axios.create({
   baseURL: databaseURL,
 });
@@ -60,6 +74,25 @@ export const updateGroup = async (group: Group) => {
 };
 export const deleteGroup = async (id: number) => {
   return await api.delete(`/groups/${id}`);
+};
+
+// Courses API
+export const getCourses = async () => {
+  const response = await api.get("/courses/");
+  return response.data;
+};
+export const getCourseDetail = async (id: number) => {
+  const response = await api.get(`/courses/${id}`);
+  return response.data;
+};
+export const addCourse = async (course: Course) => {
+  return await api.post("/courses/", course);
+};
+export const updateCourse = async (course: Course) => {
+  return await api.put(`/courses/${course.id}`, course);
+};
+export const deleteCourse = async (id: number) => {
+  return await api.delete(`/courses/${id}`);
 };
 
 export default api;

@@ -96,66 +96,6 @@ export default function Home() {
           style={{ flex: 1 }}
         >
           <View style={homeStyles.bg}>
-            <View style={homeStyles.view}>
-              <View style={homeStyles.box}>
-                <Text style={[homeStyles.timeText, { fontFamily: "Jersey10" }]}>
-                  Time till next class:{" "}
-                </Text>
-                <Text style={homeStyles.timeText}>00:00 </Text>
-              </View>
-            </View>
-            <View
-              style={{
-                alignItems: "center",
-                justifyContent: "center",
-                marginTop: 45,
-              }}
-            >
-              <TouchableOpacity
-                onPressIn={() => setIsPressed(true)}
-                onPressOut={() => {
-                  setIsPressed(false);
-                }}
-                onPress={() => {
-                  handleCheckIn();
-                }}
-                style={{ marginTop: 20 }}
-              >
-                <ImageBackground
-                  source={
-                    isPressed
-                      ? require("./../assets/images/submitButton2.png")
-                      : require("./../assets/images/submitButton.png")
-                  }
-                  style={{
-                    width: 200,
-                    height: 60,
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                  imageStyle={{ borderRadius: 10 }}
-                >
-                  <Text
-                    style={{
-                      color: "white",
-                      fontSize: 20,
-                      fontFamily: "Jersey10",
-                      transform: [{ translateY: isPressed ? 10 : -5 }],
-                    }}
-                  >
-                    Check In
-                  </Text>
-                </ImageBackground>
-              </TouchableOpacity>
-            </View>
-            <View style={homeStyles.view}>
-              <View style={homeStyles.box}>
-                <Text style={[homeStyles.timeText, { fontFamily: "Jersey10" }]}>
-                  Time till next class:{" "}
-                </Text>
-                <Text style={homeStyles.timeText}>00:00 </Text>
-              </View>
-            </View>
             {isAtEvent && (
               <TouchableOpacity
                 onPressIn={() => setIsPressed(true)}

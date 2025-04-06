@@ -160,7 +160,7 @@ export default function AddCourse() {
               <Text style={signinStyles.text}>Class Name</Text>
               <Controller
                 control={control}
-                name="name"
+                name="start_date"
                 render={({ field: { onChange, value } }) => (
                   <TextInput
                     style={[signinStyles.border, { width: 225 }]}
@@ -193,35 +193,40 @@ export default function AddCourse() {
                   />
                 )}
               />
-              {errors.start_date && (
-                <Text style={[signinStyles.text, { color: "red" }]}>
-                  {errors.start_date.message}
-                </Text>
+
+              <Controller
+                control={control}
+                name="end_date"
+                render={({ field: { onChange, value } }) => (
+                  <DateTimePicker
+                    value={new Date()}
+                    mode="date"
+                    onChange={() => handleEditTime}
+                  />
+                )}
+              />
+
+              <Controller
+                control={control}
+                name="end_date"
+                render={({ field: { onChange, value } }) => (
+                  <DateTimePicker
+                    value={new Date()}
+                    mode="date"
+                    onChange={() => handleEditTime}
+                  />
+                )}
+              />
+              <Button
+                title="Location Picker"
+                onPress={() => setShowLocationPicker(!showLocationPicker)}
+              ></Button>
+              {showLocationPicker && (
+                <SelectionMap
+                  onFindLat={setCourseLat}
+                  onFindLong={setCourseLong}
+                ></SelectionMap>
               )}
-
-              <Controller
-                control={control}
-                name="end_date"
-                render={({ field: { onChange, value } }) => (
-                  <DateTimePicker
-                    value={new Date()}
-                    mode="date"
-                    onChange={() => handleEditTime}
-                  />
-                )}
-              />
-
-              <Controller
-                control={control}
-                name="end_date"
-                render={({ field: { onChange, value } }) => (
-                  <DateTimePicker
-                    value={new Date()}
-                    mode="date"
-                    onChange={() => handleEditTime}
-                  />
-                )}
-              />
 
               <TouchableOpacity
                 onPress={() => {

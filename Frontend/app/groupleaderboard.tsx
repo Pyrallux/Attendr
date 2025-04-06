@@ -11,7 +11,7 @@ import { addScheduleStyles } from "../styles/addScheduleStyles";
 interface Member {
   user_id: number;
   username: string;
-  score: number
+  score: number;
 }
 
 export default function GroupLeaderboard() {
@@ -25,16 +25,23 @@ export default function GroupLeaderboard() {
   });
   const { mutateAsync: getUserDetailMutation } = useMutation({
     mutationFn: (id: number) => getUserDetail(id),
-  })
+    onSuccess: (data) => {
+      let member_list: Member[] = memberList;
+      member_list.push({
+        user_id: data.user_id,
+        username: data.username,
+        score: data.score,
+      });
+      setMemberList([...member_list]);
+    },
+  });
 
   useEffect(() => {
     if (groupData) {
       let member_list: Member[] = [];
-      for (let i=0; i < groupData.members.length; i++) {
-        let userData = await getUserDetailMutation(groupData[i])
-        member_list.push({user_id: userData.user_id, username: userData.username, score: userData.score});
+      for (let i = 0; i < groupData.members.length; i++) {
+        getUserDetailMutation(groupData[i]);
       }
-      setMemberList([...member_list])
     }
   }, [groupData]);
 
@@ -44,13 +51,14 @@ export default function GroupLeaderboard() {
   return (
     <>
       <View style={groupsStyles.bg}>
-        {memberList.map((m: member, i) =>
+        {/* {memberList.map((m: Member, i: number) => {
         <View key={i}>
           <Text>#{i}</Text>
        <Text>{m.username}</Text>
        <Text>{m.score}</Text>
-       </View>
-      <BottomBar></BottomBar>
+       </View>}} */}
+        // Textinput with a button
+        <BottomBar></BottomBar>
       </View>
     </>
   );

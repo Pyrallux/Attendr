@@ -52,8 +52,8 @@ export default function Profile() {
             </View>
           </View>
         </View>
+        <BottomBar></BottomBar>
       </View>
-      <BottomBar></BottomBar>
     </>
   );
 }

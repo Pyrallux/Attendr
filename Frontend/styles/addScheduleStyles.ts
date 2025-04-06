@@ -56,4 +56,9 @@ export const addScheduleStyles = StyleSheet.create({
     paddingTop: 80,
     fontFamily: "Jersey10",
   },
+  checkText: {
+    color: "white",
+    fontSize: 16,
+    fontFamily: "Jersey10",
+  },
 });

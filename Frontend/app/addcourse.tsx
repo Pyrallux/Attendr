@@ -52,6 +52,8 @@ export default function AddCourse() {
     name: yup.string().max(20).required("*Name is Required"),
     time: yup.string().required("*Time input is required"),
     days: yup.array().of(yup.number().max(7)).min(1),
+    start_date: yup.date().min(new Date()).required("*Start date is required"),
+    end_date: yup.date().required("*End date is required"),
   });
   const {
     control,

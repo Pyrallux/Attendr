@@ -31,4 +31,6 @@ urlpatterns = [
     path("db/groups/<int:id>", views.group_detail),
     path("db/days/", views.day_list),
     path("db/days/<int:id>", views.day_detail),
+    path("db/events/", views.event_list),
+    path("db/events/<int:id>", views.event_detail),
 ]

@@ -172,6 +172,23 @@ export default function AddCourse() {
                 </Text>
               )}
 
+              <Controller
+                control={control}
+                name="end_date"
+                render={({ field: { onChange, value } }) => (
+                  <DateTimePicker
+                    value={new Date()}
+                    mode="date"
+                    onChange={() => handleEditTime}
+                  />
+                )}
+              />
+              {errors.end_date && (
+                <Text style={[signinStyles.text, { color: "red" }]}>
+                  {errors.end_date.message}
+                </Text>
+              )}
+
               <TouchableOpacity
                 onPress={() => {
                   handleSubmit(onSubmit)();

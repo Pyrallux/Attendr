@@ -6,6 +6,7 @@ import { getGroupDetail, getGroups, getUserDetail } from "@/api/api";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "./_layout";
 import { Redirect, useRouter } from "expo-router";
+import { addScheduleStyles } from "../styles/addScheduleStyles";
 
 interface Member {
   user_id: number;

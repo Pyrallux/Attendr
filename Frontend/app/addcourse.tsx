@@ -211,41 +211,123 @@ export default function AddCourse() {
                 name="days"
                 render={({ field: { onChange, value } }) => (
                   <>
-                    <Text>Monday</Text>
-                    <CheckBox
-                      onValueChange={() => handleClickCheck(1)}
-                      value={dayList.includes(1)}
-                    />
-                    <Text>Tuesday</Text>
-                    <CheckBox
-                      onValueChange={() => handleClickCheck(2)}
-                      value={dayList.includes(2)}
-                    />
-                    <Text>Wednesday</Text>
-                    <CheckBox
-                      onValueChange={() => handleClickCheck(3)}
-                      value={dayList.includes(3)}
-                    />
-                    <Text>Thursday</Text>
-                    <CheckBox
-                      onValueChange={() => handleClickCheck(4)}
-                      value={dayList.includes(4)}
-                    />
-                    <Text>Friday</Text>
-                    <CheckBox
-                      onValueChange={() => handleClickCheck(5)}
-                      value={dayList.includes(5)}
-                    />
-                    <Text>Saturday</Text>
-                    <CheckBox
-                      onValueChange={() => handleClickCheck(6)}
-                      value={dayList.includes(6)}
-                    />
-                    <Text>Sunday</Text>
-                    <CheckBox
-                      onValueChange={() => handleClickCheck(7)}
-                      value={dayList.includes(7)}
-                    />
+                    <View style={{ flexDirection: "row", gap: 10 }}>
+                      <View
+                        style={{
+                          flexDirection: "column",
+                          marginTop: 0,
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Text style={[addScheduleStyles.checkText]}>
+                          Monday
+                        </Text>
+                        <CheckBox
+                          onValueChange={() => handleClickCheck(1)}
+                          value={dayList.includes(1)}
+                        />
+                      </View>
+                      <View
+                        style={{
+                          flexDirection: "column",
+                          marginTop: 0,
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Text style={[addScheduleStyles.checkText]}>
+                          Tuesday
+                        </Text>
+                        <CheckBox
+                          onValueChange={() => handleClickCheck(2)}
+                          value={dayList.includes(2)}
+                        />
+                      </View>
+                      <View
+                        style={{
+                          flexDirection: "column",
+                          marginTop: 0,
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Text style={[addScheduleStyles.checkText]}>
+                          Wednesday
+                        </Text>
+                        <CheckBox
+                          onValueChange={() => handleClickCheck(3)}
+                          value={dayList.includes(3)}
+                        />
+                      </View>
+                      <View
+                        style={{
+                          flexDirection: "column",
+                          marginTop: 0,
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Text style={[addScheduleStyles.checkText]}>
+                          Thursday
+                        </Text>
+                        <CheckBox
+                          onValueChange={() => handleClickCheck(4)}
+                          value={dayList.includes(4)}
+                        />
+                      </View>
+                    </View>
+
+                    <View style={{ flexDirection: "row", gap: 10 }}>
+                      <View
+                        style={{
+                          flexDirection: "column",
+                          marginTop: 0,
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Text style={[addScheduleStyles.checkText]}>
+                          Friday
+                        </Text>
+                        <CheckBox
+                          onValueChange={() => handleClickCheck(5)}
+                          value={dayList.includes(5)}
+                        />
+                      </View>
+                      <View
+                        style={{
+                          flexDirection: "column",
+                          marginTop: 0,
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Text style={[addScheduleStyles.checkText]}>
+                          Saturday
+                        </Text>
+                        <CheckBox
+                          onValueChange={() => handleClickCheck(6)}
+                          value={dayList.includes(6)}
+                        />
+                      </View>
+                      <View
+                        style={{
+                          flexDirection: "column",
+                          marginTop: 0,
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Text style={[addScheduleStyles.checkText]}>
+                          Sunday
+                        </Text>
+                        <CheckBox
+                          onValueChange={() => handleClickCheck(7)}
+                          value={dayList.includes(7)}
+                        />
+                      </View>
+                    </View>
                   </>
                 )}
               />

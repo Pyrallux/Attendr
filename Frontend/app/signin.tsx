@@ -145,7 +145,6 @@ export default function SignIn() {
                     render={({ field: { onChange, value } }) => (
                       <TextInput
                         style={[signinStyles.border, { width: 225 }]}
-                        placeholder="doejohn2004"
                         placeholderTextColor="gray"
                         onChangeText={onChange}
                         value={value}

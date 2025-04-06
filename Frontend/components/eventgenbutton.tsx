@@ -91,9 +91,52 @@ export default function EventGenButton() {
     router.navigate("/schedule");
   };
 
+  const [isPressed, setIsPressed] = useState(false);
+
+  const handlePress = () => {
+    setTimeout(() => setIsPressed(false), 75);
+  };
+
   return (
     <>
-      <Button title="Submit" onPress={() => generateEvents()}></Button>
+      <TouchableOpacity
+        onPressIn={() => setIsPressed(true)}
+        onPressOut={() => {
+          setIsPressed(false);
+        }}
+        onPress={() => {
+          generateEvents();
+          handlePress();
+          setIsPressed(true);
+        }}
+        style={{ marginTop: 20 }}
+      >
+        <ImageBackground
+          source={
+            isPressed
+              ? require("./../assets/images/submitButton2.png")
+              : require("./../assets/images/submitButton.png")
+          }
+          style={{
+            width: 200,
+            height: 60,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          imageStyle={{ borderRadius: 10 }}
+        >
+          <Text
+            style={{
+              color: "white",
+              fontSize: 20,
+              fontFamily: "Jersey10",
+              transform: [{ translateY: isPressed ? 10 : -5 }],
+            }}
+          >
+            Generate Events
+          </Text>
+        </ImageBackground>
+      </TouchableOpacity>
     </>
   );
 }

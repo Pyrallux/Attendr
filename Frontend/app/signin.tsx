@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { useContext, useState } from "react";
 import { AppContext } from "./_layout";
-import { signinStyles } from "./signinStyles";
+import { signinStyles } from "../styles/signinStyles";
 import { useMutation } from "@tanstack/react-query";
 import { getUsers } from "@/api/api";
 import { Controller, useForm } from "react-hook-form";
@@ -82,11 +82,11 @@ export default function SignIn() {
     setUserId(
       users.filter((u: User) => u.username === formData.username)[0].id
     );
-    router.navigate("/home");
+    router.replace("/");
   };
 
   const [fontsLoaded] = useFonts({
-    Jersey10: require("./../assets/fonts/Jersey10-Regular.ttf"),
+    Jersey10: require("../assets/fonts/Jersey10-Regular.ttf"),
   });
 
   if (!fontsLoaded) {

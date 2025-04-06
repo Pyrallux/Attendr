@@ -11,7 +11,7 @@ export default function BottomBar() {
         <Pressable onPress={() => router.navigate("/groups")}>
           <Image source={require("../../assets/images/bigGroups.png")}></Image>
         </Pressable>
-        <Pressable onPress={() => router.navigate("/home")}>
+        <Pressable onPress={() => router.navigate("/")}>
           <Image source={require("../../assets/images/bigHOME.png")}></Image>
         </Pressable>
         <Pressable onPress={() => router.navigate("/profile")}>

@@ -6,7 +6,6 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     display: "flex",
-    paddingTop: 700,
   },
 
   box: {
@@ -19,5 +18,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     display: "flex",
     borderRadius: 44,
+    position: "absolute",
+    top: 350,
   },
 });

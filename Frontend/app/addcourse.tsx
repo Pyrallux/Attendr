@@ -157,16 +157,23 @@ export default function AddCourse() {
                 Enter a New Course
               </Text>
 
-              <Text>Name</Text>
+              <Text style={addScheduleStyles.text}>Name</Text>
               <Controller
                 control={control}
                 name="start_date"
                 render={({ field: { onChange, value } }) => (
-                  <TextInput value={courseName} onChangeText={handleName} />
+                  <TextInput
+                    value={courseName}
+                    onChangeText={handleName}
+                    style={[
+                      addScheduleStyles.text,
+                      { borderColor: "white", borderWidth: 2, width: 225 },
+                    ]}
+                  />
                 )}
               />
 
-              <Text>Start Date</Text>
+              <Text style={addScheduleStyles.text}>Start Date</Text>
               <Controller
                 control={control}
                 name="start_date"
@@ -179,7 +186,7 @@ export default function AddCourse() {
                 )}
               />
 
-              <Text>End Date</Text>
+              <Text style={addScheduleStyles.text}>End Date</Text>
               <Controller
                 control={control}
                 name="end_date"
@@ -192,7 +199,7 @@ export default function AddCourse() {
                 )}
               />
 
-              <Text>Time</Text>
+              <Text style={addScheduleStyles.text}>Time</Text>
               <Controller
                 control={control}
                 name="time"

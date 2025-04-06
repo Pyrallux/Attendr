@@ -4,7 +4,12 @@ import * as Location from "expo-location";
 import { StyleSheet } from "react-native";
 import { AppContext } from "@/app/_layout";
 
-export default function GoogleMap() {
+interface Props {
+  onFindLat: Function;
+  onFindLong: Function;
+}
+
+export default function SelectionMap(props: Props) {
   const { isAtEvent } = useContext(AppContext);
   const [latitude, setLatitude] = useState<number>(0);
   const [longitude, setLongitude] = useState<number>(0);
@@ -35,7 +40,8 @@ export default function GoogleMap() {
     setMarkerLong(longitude);
     setMarkerLat(latitude);
 
-    console.log(latitude, longitude);
+    props.onFindLat(latitude);
+    props.onFindLong(longitude);
   };
 
   return (

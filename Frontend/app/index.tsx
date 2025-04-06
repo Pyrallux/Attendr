@@ -6,6 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import React from "react";
 import { AppContext } from "./_layout";
 import { Redirect } from "expo-router";
+import { LinearGradient } from "expo-linear-gradient";
 import DistanceMap from "@/components/DistanceMap";
 
 export default function Home() {
@@ -30,6 +31,24 @@ export default function Home() {
   // TODO remove set lat and long values
   return (
     <>
+      <View style={homeStyles.bg}>
+        <View style={homeStyles.bg}>
+          <LinearGradient
+            colors={["#0f9679", "#292929"]}
+            start={[1, 0]}
+            end={[0, 0]}
+            locations={[0, 1]}
+            style={{ flex: 1 }}
+          >
+            <View style={homeStyles.view}>
+              <View style={homeStyles.box}>
+                <Text style={[homeStyles.timeText, { fontFamily: "Jersey10" }]}>
+                  Time till next class:{" "}
+                </Text>
+                <Text style={homeStyles.timeText}>00:00 </Text>
+              </View>
+            </View>
+          </LinearGradient>
       <DistanceMap eventLat={10} eventLong={20}></DistanceMap>
       <View style={homeStyles.view}>
         <View style={homeStyles.box}>
@@ -39,6 +58,8 @@ export default function Home() {
 
           <Text style={homeStyles.timeText}>00:00 </Text>
         </View>
+        <GoogleMap></GoogleMap>
+        <BottomBar></BottomBar>
       </View>
       {isAtEvent && <Button title="Check In" onPress={handleCheckIn}></Button>}
       <BottomBar></BottomBar>

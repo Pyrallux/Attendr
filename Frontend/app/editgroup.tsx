@@ -119,7 +119,7 @@ export default function EditGroup() {
               name="name"
               render={({ field: { onChange, value } }) => (
                 <TextInput
-                  style={signinStyles.border}
+                  style={[signinStyles.border, { width: 225 }]}
                   placeholderTextColor="gray"
                   onChangeText={onChange}
                   value={value}
@@ -159,7 +159,31 @@ export default function EditGroup() {
                 </Text>
               </ImageBackground>
             </TouchableOpacity>
-            <Button title="Delete Group" onPress={handleDeleteGroup} />
+            <TouchableOpacity
+              onPress={() => {
+                {
+                  handleDeleteGroup();
+                }
+              }}
+              style={{
+                marginTop: 5,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text
+                style={{
+                  color: "red",
+                  fontSize: 20,
+                  fontFamily: "Jersey10",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  paddingTop: 100,
+                }}
+              >
+                Permanently Delete Group
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>

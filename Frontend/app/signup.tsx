@@ -168,7 +168,7 @@ export default function SignUp() {
                     name="firstName"
                     render={({ field: { onChange, value } }) => (
                       <TextInput
-                        style={signupStyles.border}
+                        style={[signupStyles.border, { width: 225 }]}
                         placeholder="John"
                         placeholderTextColor="gray"
                         onChangeText={onChange}
@@ -187,7 +187,7 @@ export default function SignUp() {
                     name="lastName"
                     render={({ field: { onChange, value } }) => (
                       <TextInput
-                        style={signupStyles.border}
+                        style={[signupStyles.border, { width: 225 }]}
                         placeholder="Doe"
                         placeholderTextColor="gray"
                         onChangeText={onChange}
@@ -212,7 +212,7 @@ export default function SignUp() {
                     name="username"
                     render={({ field: { onChange, value } }) => (
                       <TextInput
-                        style={signupStyles.border}
+                        style={[signupStyles.border, { width: 225 }]}
                         placeholder="doejohn2004"
                         placeholderTextColor="gray"
                         onChangeText={onChange}
@@ -232,7 +232,7 @@ export default function SignUp() {
                     name="email"
                     render={({ field: { onChange, value } }) => (
                       <TextInput
-                        style={signupStyles.border}
+                        style={[signupStyles.border, { width: 225 }]}
                         placeholder="john.doe@example.com"
                         placeholderTextColor="gray"
                         onChangeText={onChange}
@@ -252,7 +252,7 @@ export default function SignUp() {
                     name="password"
                     render={({ field: { onChange, value } }) => (
                       <TextInput
-                        style={signupStyles.border}
+                        style={[signupStyles.border, { width: 225 }]}
                         secureTextEntry={true}
                         onChangeText={onChange}
                         value={value}
@@ -271,7 +271,7 @@ export default function SignUp() {
                     name="passwordConfirmation"
                     render={({ field: { onChange, value } }) => (
                       <TextInput
-                        style={signupStyles.border}
+                        style={[signupStyles.border, { width: 225 }]}
                         secureTextEntry={true}
                         onChangeText={onChange}
                         value={value}

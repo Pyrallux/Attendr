@@ -21,6 +21,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "expo-router";
 import { useFonts } from "expo-font";
 import BottomBar from "@/components/BottomBar/BottomBar";
+import { LinearGradient } from "expo-linear-gradient";
 
 interface Group {
   id?: number;
@@ -94,7 +95,7 @@ export default function AddGroup() {
               name="name"
               render={({ field: { onChange, value } }) => (
                 <TextInput
-                  style={signinStyles.border}
+                  style={[signinStyles.border, { width: 225 }]}
                   placeholderTextColor="gray"
                   onChangeText={onChange}
                   value={value}

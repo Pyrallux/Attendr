@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ImageBackground,
   Image,
+  ScrollView,
 } from "react-native";
 import { useContext, useState } from "react";
 import { AppContext } from "./_layout";
@@ -17,6 +18,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "expo-router";
 import { useFonts } from "expo-font";
+import { LinearGradient } from "expo-linear-gradient";
 
 interface User {
   id: number;
@@ -101,111 +103,130 @@ export default function SignIn() {
 
   return (
     <>
-      <View style={signinStyles.bg}>
-        <View style={[signinStyles.logo, { flexDirection: "row" }]}>
-          <Text style={[signinStyles.logoText, { fontFamily: "Jersey10" }]}>
-            Attendr
-          </Text>
-          <Image
-            style={{ marginTop: 50, marginLeft: 5 }}
-            source={require("./../assets/images/LOGO.png")}
-          ></Image>
-        </View>
-        <View style={signinStyles.content}>
-          <View style={signinStyles.box}>
-            <Text style={[signinStyles.header, { fontFamily: "Jersey10" }]}>
-              Sign In
-            </Text>
-
-            <Text style={signinStyles.text}>Username</Text>
-            <Controller
-              control={control}
-              name="username"
-              render={({ field: { onChange, value } }) => (
-                <TextInput
-                  style={signinStyles.border}
-                  placeholder="doejohn2004"
-                  placeholderTextColor="gray"
-                  onChangeText={onChange}
-                  value={value}
-                />
-              )}
-            />
-            {errors.username && (
-              <Text style={[signinStyles.text, { color: "red" }]}>
-                {errors.username.message}
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <View style={signinStyles.bg}>
+          <LinearGradient
+            colors={["#0f9679", "#46e56f"]}
+            start={[0.5, 0]}
+            end={[1, 1]}
+            locations={[0, 0.1]}
+          >
+            <View style={[signinStyles.logo, { flexDirection: "row" }]}>
+              <Text style={[signinStyles.logoText, { fontFamily: "Jersey10" }]}>
+                Attendr
               </Text>
-            )}
-
-            <Text style={signinStyles.text}>Password</Text>
-            <Controller
-              control={control}
-              name="password"
-              render={({ field: { onChange, value } }) => (
-                <TextInput
-                  style={signinStyles.border}
-                  secureTextEntry={true}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              )}
-            />
-            {errors.password && (
-              <Text style={[signinStyles.text, { color: "red" }]}>
-                {errors.password.message}
-              </Text>
-            )}
-
-            <TouchableOpacity
-              onPressIn={() => setIsPressed(true)}
-              onPressOut={() => {
-                setIsPressed(false);
-              }}
-              onPress={() => {
-                handleSubmit(onSubmit)();
-                handlePress();
-                setIsPressed(true);
-              }}
-              style={{ marginTop: 20 }}
-            >
-              <ImageBackground
-                source={
-                  isPressed
-                    ? require("./../assets/images/submitButton2.png")
-                    : require("./../assets/images/submitButton.png")
-                }
-                style={{
-                  width: 200,
-                  height: 60,
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-                imageStyle={{ borderRadius: 10 }}
-              >
-                <Text
-                  style={{
-                    color: "white",
-                    fontSize: 20,
-                    fontFamily: "Jersey10",
-                    transform: [{ translateY: isPressed ? 10 : -5 }],
-                  }}
+              <Image
+                style={{ marginTop: 50, marginLeft: 5 }}
+                source={require("./../assets/images/LOGO.png")}
+              ></Image>
+            </View>
+            <View style={signinStyles.content}>
+              <View style={signinStyles.box}>
+                <LinearGradient
+                  colors={["#4b4b4b", "#292929"]}
+                  start={[0.5, 0]}
+                  end={[1, 1]}
+                  locations={[0, 0.1]}
+                  style={signinStyles.box}
                 >
-                  Submit
-                </Text>
-              </ImageBackground>
-            </TouchableOpacity>
-            <Text style={[signinStyles.text, { color: "red" }]}>
-              {loginError}
-            </Text>
-            <Text
-              onPress={() => router.navigate("/signup")}
-              style={signinStyles.text}
-            >
-              Don't have an account? Click here to sign up.
-            </Text>
-          </View>
+                  <Text
+                    style={[signinStyles.header, { fontFamily: "Jersey10" }]}
+                  >
+                    Sign In
+                  </Text>
+
+                  <Text style={signinStyles.text}>Username</Text>
+                  <Controller
+                    control={control}
+                    name="username"
+                    render={({ field: { onChange, value } }) => (
+                      <TextInput
+                        style={[signinStyles.border, { width: 225 }]}
+                        placeholder="doejohn2004"
+                        placeholderTextColor="gray"
+                        onChangeText={onChange}
+                        value={value}
+                      />
+                    )}
+                  />
+                  {errors.username && (
+                    <Text style={[signinStyles.text, { color: "red" }]}>
+                      {errors.username.message}
+                    </Text>
+                  )}
+
+                  <Text style={signinStyles.text}>Password</Text>
+                  <Controller
+                    control={control}
+                    name="password"
+                    render={({ field: { onChange, value } }) => (
+                      <TextInput
+                        style={[signinStyles.border, { width: 225 }]}
+                        secureTextEntry={true}
+                        onChangeText={onChange}
+                        value={value}
+                      />
+                    )}
+                  />
+                  {errors.password && (
+                    <Text style={[signinStyles.text, { color: "red" }]}>
+                      {errors.password.message}
+                    </Text>
+                  )}
+
+                  <TouchableOpacity
+                    onPressIn={() => setIsPressed(true)}
+                    onPressOut={() => {
+                      setIsPressed(false);
+                    }}
+                    onPress={() => {
+                      handleSubmit(onSubmit)();
+                      handlePress();
+                      setIsPressed(true);
+                    }}
+                    style={{ marginTop: 20 }}
+                  >
+                    <ImageBackground
+                      source={
+                        isPressed
+                          ? require("./../assets/images/submitButton2.png")
+                          : require("./../assets/images/submitButton.png")
+                      }
+                      style={{
+                        width: 200,
+                        height: 60,
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                      imageStyle={{ borderRadius: 10 }}
+                    >
+                      <Text
+                        style={{
+                          color: "white",
+                          fontSize: 20,
+                          fontFamily: "Jersey10",
+                          transform: [{ translateY: isPressed ? 10 : -5 }],
+                        }}
+                      >
+                        Submit
+                      </Text>
+                    </ImageBackground>
+                  </TouchableOpacity>
+                  <Text style={[signinStyles.text, { color: "red" }]}>
+                    {loginError}
+                  </Text>
+                  <Text
+                    onPress={() => router.navigate("/signup")}
+                    style={signinStyles.text}
+                  >
+                    Don't have an account? Click here to sign up.
+                  </Text>
+                </LinearGradient>
+              </View>
+            </View>
+          </LinearGradient>
         </View>
-      </View>
+      </ScrollView>
     </>
   );
 }

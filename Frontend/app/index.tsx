@@ -7,6 +7,7 @@ import React from "react";
 import { AppContext } from "./_layout";
 import { Redirect } from "expo-router";
 import GoogleMap from "@/components/GoogleMap";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function Home() {
   const { userId } = useContext(AppContext);
@@ -23,17 +24,28 @@ export default function Home() {
   }
   return (
     <>
-      <GoogleMap></GoogleMap>
-      <View style={homeStyles.view}>
-        <View style={homeStyles.box}>
-          <Text style={[homeStyles.timeText, { fontFamily: "Jersey10" }]}>
-            Time till next class:{" "}
-          </Text>
-          <Text style={homeStyles.timeText}>00:00 </Text>
+      <View style={homeStyles.bg}>
+        <View style={homeStyles.bg}>
+          <LinearGradient
+            colors={["#0f9679", "#292929"]}
+            start={[1, 0]}
+            end={[0, 0]}
+            locations={[0, 1]}
+            style={{ flex: 1 }}
+          >
+            <View style={homeStyles.view}>
+              <View style={homeStyles.box}>
+                <Text style={[homeStyles.timeText, { fontFamily: "Jersey10" }]}>
+                  Time till next class:{" "}
+                </Text>
+                <Text style={homeStyles.timeText}>00:00 </Text>
+              </View>
+            </View>
+          </LinearGradient>
         </View>
+        <GoogleMap></GoogleMap>
+        <BottomBar></BottomBar>
       </View>
-
-      <BottomBar></BottomBar>
     </>
   );
 }

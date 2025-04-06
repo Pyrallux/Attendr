@@ -37,7 +37,7 @@ export const homeStyles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     display: "flex",
-    paddingTop: 700,
+    paddingTop: 600,
   },
 
   timeText: {

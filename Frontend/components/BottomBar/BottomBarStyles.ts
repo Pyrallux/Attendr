@@ -18,7 +18,6 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     display: "flex",
     borderRadius: 44,
-    position: "absolute",
-    top: 350,
+    marginTop: 200,
   },
 });

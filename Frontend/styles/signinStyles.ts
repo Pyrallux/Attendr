@@ -17,7 +17,7 @@ export const signinStyles = StyleSheet.create({
     backgroundColor: "#46e56f",
   },
   border: {
-    borderColor: "0f9679",
+    borderColor: "white",
     borderWidth: 2,
     color: "white",
     fontSize: 24,
@@ -34,16 +34,17 @@ export const signinStyles = StyleSheet.create({
     fontFamily: "Jersey10",
   },
   box: {
-    height: 800,
+    height: 710,
     width: "100%",
     backgroundColor: "#292929",
-    justifyContent: "center",
     alignItems: "center",
     display: "flex",
-    borderRadius: 44,
+    borderTopLeftRadius: 44,
+    borderTopRightRadius: 44,
     flexDirection: "column",
     gap: 20,
-    paddingBottom: 200,
+    paddingBottom: 100,
+    paddingTop: 40,
   },
   logo: {
     justifyContent: "center",
@@ -55,5 +56,4 @@ export const signinStyles = StyleSheet.create({
     paddingTop: 80,
     fontFamily: "Jersey10",
   },
-  logoandtitle: {},
 });

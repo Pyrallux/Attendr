@@ -48,22 +48,21 @@ export default function Home() {
                 <Text style={homeStyles.timeText}>00:00 </Text>
               </View>
             </View>
-
-            <View style={homeStyles.view}>
-              <View style={homeStyles.box}>
-                <Text style={[homeStyles.timeText, { fontFamily: "Jersey10" }]}>
-                  Time till next class:{" "}
-                </Text>
-                <Text style={homeStyles.timeText}>00:00 </Text>
-              </View>
-            </View>
-            {isAtEvent && (
-              <Button title="Check In" onPress={handleCheckIn}></Button>
-            )}
-          </View>
+          </LinearGradient>
           <DistanceMap eventLat={10} eventLong={20}></DistanceMap>
-          <BottomBar></BottomBar>
-        </LinearGradient>
+          <View style={homeStyles.view}>
+            <View style={homeStyles.box}>
+              <Text style={[homeStyles.timeText, { fontFamily: "Jersey10" }]}>
+                Time till next class:{" "}
+              </Text>
+              <Text style={homeStyles.timeText}>00:00 </Text>
+            </View>
+          </View>
+          {isAtEvent && (
+            <Button title="Check In" onPress={handleCheckIn}></Button>
+          )}
+        </View>
+        <BottomBar></BottomBar>
       </View>
     </>
   );

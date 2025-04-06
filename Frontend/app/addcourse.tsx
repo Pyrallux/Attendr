@@ -126,11 +126,29 @@ export default function AddCourse() {
                   />
                 )}
               />
-              {errors.name && (
-                <Text style={[signinStyles.text, { color: "red" }]}>
-                  {errors.name.message}
-                </Text>
-              )}
+              <Controller
+                control={control}
+                name="start_date"
+                render={({ field: { onChange, value } }) => (
+                  <DateTimePicker
+                    value={new Date()}
+                    mode="date"
+                    onChange={() => handleEditTime}
+                  />
+                )}
+              />
+
+              <Controller
+                control={control}
+                name="end_date"
+                render={({ field: { onChange, value } }) => (
+                  <DateTimePicker
+                    value={new Date()}
+                    mode="date"
+                    onChange={() => handleEditTime}
+                  />
+                )}
+              />
 
               <Controller
                 control={control}
@@ -143,11 +161,6 @@ export default function AddCourse() {
                   />
                 )}
               />
-              {errors.time && (
-                <Text style={[signinStyles.text, { color: "red" }]}>
-                  {errors.time.message}
-                </Text>
-              )}
               <Controller
                 control={control}
                 name="days"

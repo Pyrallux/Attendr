@@ -29,7 +29,6 @@ import DateTimePicker, {
 } from "@react-native-community/datetimepicker";
 import SelectionMap from "../components/SelectionMap";
 import { format } from "date-fns";
-import generateEvents from "../components/eventgenbutton";
 
 interface Course {
   id?: number;
@@ -96,7 +95,7 @@ export default function AddCourse() {
     };
     await addCourseMutation(newCourse);
     queryClient.invalidateQueries(["getCourseList"]);
-    generateEvents();
+    router.navigate("/schedule");
   };
 
   const handleName = (text: string) => {
@@ -158,66 +157,109 @@ export default function AddCourse() {
                 Enter a New Course
               </Text>
 
-              <Text style={signinStyles.text}>Class Name</Text>
+              <Text>Name</Text>
               <Controller
                 control={control}
-                name="name"
+                name="start_date"
                 render={({ field: { onChange, value } }) => (
-                  <TextInput
-                    style={[signinStyles.border, { width: 225 }]}
-                    placeholderTextColor="gray"
-                    onChangeText={onChange}
-                    value={value}
-                  />
+                  <TextInput value={courseName} onChangeText={handleName} />
                 )}
               />
+
+              <Text>Start Date</Text>
               <Controller
                 control={control}
                 name="start_date"
                 render={({ field: { onChange, value } }) => (
                   <DateTimePicker
-                    value={new Date()}
+                    value={startDate}
                     mode="date"
-                    onChange={() => handleEditTime}
+                    onChange={handleStartDate}
                   />
                 )}
               />
 
-              <Controller
-                control={control}
-                name="start_date"
-                render={({ field: { onChange, value } }) => (
-                  <DateTimePicker
-                    value={new Date()}
-                    mode="date"
-                    onChange={() => handleEditTime}
-                  />
-                )}
-              />
-
+              <Text>End Date</Text>
               <Controller
                 control={control}
                 name="end_date"
                 render={({ field: { onChange, value } }) => (
                   <DateTimePicker
-                    value={new Date()}
+                    value={endDate}
                     mode="date"
-                    onChange={() => handleEditTime}
+                    onChange={handleEndDate}
                   />
                 )}
               />
 
+              <Text>Time</Text>
               <Controller
                 control={control}
-                name="end_date"
+                name="time"
                 render={({ field: { onChange, value } }) => (
                   <DateTimePicker
-                    value={new Date()}
-                    mode="date"
-                    onChange={() => handleEditTime}
+                    value={time}
+                    mode="time"
+                    onChange={handleEditTime}
                   />
                 )}
               />
+
+              <Text>Recurrence Schedule:</Text>
+              <Controller
+                control={control}
+                name="days"
+                render={({ field: { onChange, value } }) => (
+                  <>
+                    <Text>Monday</Text>
+                    <CheckBox
+                      onValueChange={() => handleClickCheck(1)}
+                      value={dayList.includes(1)}
+                    />
+                    <Text>Tuesday</Text>
+                    <CheckBox
+                      onValueChange={() => handleClickCheck(2)}
+                      value={dayList.includes(2)}
+                    />
+                    <Text>Wednesday</Text>
+                    <CheckBox
+                      onValueChange={() => handleClickCheck(3)}
+                      value={dayList.includes(3)}
+                    />
+                    <Text>Thursday</Text>
+                    <CheckBox
+                      onValueChange={() => handleClickCheck(4)}
+                      value={dayList.includes(4)}
+                    />
+                    <Text>Friday</Text>
+                    <CheckBox
+                      onValueChange={() => handleClickCheck(5)}
+                      value={dayList.includes(5)}
+                    />
+                    <Text>Saturday</Text>
+                    <CheckBox
+                      onValueChange={() => handleClickCheck(6)}
+                      value={dayList.includes(6)}
+                    />
+                    <Text>Sunday</Text>
+                    <CheckBox
+                      onValueChange={() => handleClickCheck(7)}
+                      value={dayList.includes(7)}
+                    />
+                  </>
+                )}
+              />
+
+              <Button
+                title="Location Picker"
+                onPress={() => setShowLocationPicker(!showLocationPicker)}
+              ></Button>
+              {showLocationPicker && (
+                <SelectionMap
+                  onFindLat={setCourseLat}
+                  onFindLong={setCourseLong}
+                ></SelectionMap>
+              )}
 
               <TouchableOpacity
                 onPress={() => {

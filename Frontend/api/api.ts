@@ -37,7 +37,7 @@ interface Course {
 interface Event {
   id?: number;
   name: string;
-  date_time: string;
+  datetime: string;
   user_id: number;
 }
 

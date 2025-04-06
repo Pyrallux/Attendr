@@ -32,7 +32,7 @@ interface Course {
 interface Event {
   id?: number;
   name: string;
-  date_time: string;
+  datetime: string;
   user_id: number;
 }
 
@@ -71,19 +71,23 @@ export default function EventGenButton() {
     for (let i = 0; i < userCourses.length; i++) {
       // Generate all events between start and end date
       let currentDate = new Date(userCourses[i].start_date);
-      while (currentDate < userCourses[i].end_date) {
+      console.log(currentDate, userCourses[i].end_date);
+      while (currentDate < new Date(userCourses[i].end_date)) {
         let day = currentDate.getDay();
         if (day === 0) {
           day = 7;
         }
+        console.log(userCourses[i].days.includes(day));
         // Check if day should not be included
         if (!userCourses[i].days.includes(day)) {
+          currentDate.setDate(currentDate.getDate() + 1);
           continue;
         }
+        currentDate.setDate(currentDate.getDate() + 1);
         // Add an event on the day
         addEventMutation({
           name: courseData[i].name,
-          date_time: format(currentDate, "yyyy-MM-dd HH:mm:ss.SSS"),
+          datetime: format(currentDate, "yyyy-MM-dd HH:mm:ss.SSS"),
           user_id: userId,
         });
       }

@@ -3,7 +3,15 @@ import BottomBar from "@/components/BottomBar/BottomBar";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
-import { Button, Text, View } from "react-native";
+import {
+  Button,
+  ScrollView,
+  Text,
+  View,
+  TouchableOpacity,
+  ImageBackground,
+} from "react-native";
+import { scheduleStyles } from "../styles/scheduleStyles";
 
 interface Course {
   id: number;
@@ -47,25 +55,86 @@ export default function Schedule() {
 
   return (
     <>
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        {courseData ? (
-          courseListNames.map((s: string, id) => (
-            <View key={id}>
-              <Button title={s} onPress={() => handleClickCourse(id)} />
+      <View style={scheduleStyles.bg}>
+        <View style={scheduleStyles.bg}>
+          <ScrollView>
+            <View
+              style={{
+                marginTop: 100,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              {courseData ? (
+                courseListNames.map((s: string, id) => (
+                  <View key={id}>
+                    <TouchableOpacity
+                      onPress={() => {
+                        handleClickCourse(id);
+                      }}
+                    >
+                      <ImageBackground
+                        source={require("../assets/images/groupBG.png")} // replace with your actual path
+                        style={{
+                          width: 200,
+                          height: 80,
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                        imageStyle={{ borderRadius: 10 }} // optional rounded corners
+                      >
+                        <Text
+                          style={{
+                            color: "white",
+                            fontSize: 20,
+                            fontFamily: "Jersey10",
+                            justifyContent: "center",
+                            alignItems: "center",
+                          }}
+                        >
+                          {s}
+                        </Text>
+                      </ImageBackground>
+                    </TouchableOpacity>
+                  </View>
+                ))
+              ) : (
+                <Text style={scheduleStyles.timeText}>Loading...</Text>
+              )}
+              <TouchableOpacity
+                onPress={() => {
+                  handleAddCourse();
+                }}
+              >
+                <ImageBackground
+                  source={require("../assets/images/groupsBorderAdd.png")} // replace with your actual path
+                  style={{
+                    width: 200,
+                    height: 80,
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                  imageStyle={{ borderRadius: 10 }} // optional rounded corners
+                >
+                  <Text
+                    style={{
+                      color: "white",
+                      fontSize: 20,
+                      fontFamily: "Jersey10",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      paddingLeft: 35,
+                    }}
+                  >
+                    Add New Class
+                  </Text>
+                </ImageBackground>
+              </TouchableOpacity>
             </View>
-          ))
-        ) : (
-          <Text>Loading...</Text>
-        )}
-        <Button title="+ Add New Course" onPress={() => handleAddCourse()} />
+          </ScrollView>
+        </View>
+        <BottomBar></BottomBar>
       </View>
-      <BottomBar />
     </>
   );
 }

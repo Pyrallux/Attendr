@@ -24,8 +24,8 @@ interface Course {
   id?: number;
   name: string;
   time: string;
-  start_date: Date;
-  end_date: Date;
+  start_date: string;
+  end_date: string;
   user_id: number;
   days: number[];
   days_attended: number;

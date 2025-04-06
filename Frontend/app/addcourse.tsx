@@ -21,8 +21,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "expo-router";
 import { useFonts } from "expo-font";
 import BottomBar from "@/components/BottomBar/BottomBar";
-import CheckBox from "expo-checkbox";
-import DateTimePicker from "@react-native-community/datetimepicker";
+import { LinearGradient } from "expo-linear-gradient";
 
 interface Group {
   id?: number;
@@ -35,8 +34,7 @@ interface FormData {
   name: string;
 }
 
-export default function AddCourse() {
-  const [dayList, setDayList] = useState<number[]>([]);
+export default function AddGroup() {
   const router = useRouter();
   const { user, userId } = useContext(AppContext);
   const queryClient = useQueryClient();
@@ -48,10 +46,6 @@ export default function AddCourse() {
 
   const schema = yup.object().shape({
     name: yup.string().max(20).required("*Name is Required"),
-    time: yup.string().required("*Time input is required"),
-    days: yup.array().of(yup.number().max(7)).min(1),
-    start_date: yup.date().min(new Date()).required("*Start date is required"),
-    end_date: yup.date().required("*End date is required"),
   });
   const {
     control,
@@ -73,21 +67,6 @@ export default function AddCourse() {
     router.navigate("/groups");
   };
 
-  const handleEditTime = (time: string) => {
-    // do something
-  };
-
-  const handleClickCheck = (id: number) => {
-    let day_list: number[] = dayList;
-    if (day_list.includes(id)) {
-      day_list.splice(day_list.indexOf(id), 1);
-    } else {
-      day_list.push(id);
-    }
-
-    setDayList([...day_list]);
-  };
-
   const [fontsLoaded] = useFonts({
     Jersey10: require("../assets/fonts/Jersey10-Regular.ttf"),
   });
@@ -107,7 +86,7 @@ export default function AddCourse() {
         <View style={signinStyles.content}>
           <View style={signinStyles.box}>
             <Text style={[signinStyles.header, { fontFamily: "Jersey10" }]}>
-              Enter a New Course
+              Create a New Group
             </Text>
 
             <Text style={signinStyles.text}>Name</Text>
@@ -116,7 +95,7 @@ export default function AddCourse() {
               name="name"
               render={({ field: { onChange, value } }) => (
                 <TextInput
-                  style={signinStyles.border}
+                  style={[signinStyles.border, { width: 225 }]}
                   placeholderTextColor="gray"
                   onChangeText={onChange}
                   value={value}
@@ -128,106 +107,6 @@ export default function AddCourse() {
                 {errors.name.message}
               </Text>
             )}
-            <Controller
-              control={control}
-              name="time"
-              render={({ field: { onChange, value } }) => (
-                <DateTimePicker
-                  value={new Date()}
-                  mode="time"
-                  onChange={() => handleEditTime}
-                />
-              )}
-            />
-            {errors.time && (
-              <Text style={[signinStyles.text, { color: "red" }]}>
-                {errors.time.message}
-              </Text>
-            )}
-            <Controller
-              control={control}
-              name="days"
-              render={({ field: { onChange, value } }) => (
-                <>
-                  <Text>Monday</Text>
-                  <CheckBox
-                    onValueChange={() => handleClickCheck(1)}
-                    value={dayList.includes(1)}
-                  />
-                  <Text>Tuesday</Text>
-                  <CheckBox
-                    onValueChange={() => handleClickCheck(2)}
-                    value={dayList.includes(2)}
-                  />
-                  <Text>Wednesday</Text>
-                  <CheckBox
-                    onValueChange={() => handleClickCheck(3)}
-                    value={dayList.includes(3)}
-                  />
-                  <Text>Thursday</Text>
-                  <CheckBox
-                    onValueChange={() => handleClickCheck(4)}
-                    value={dayList.includes(4)}
-                  />
-                  <Text>Friday</Text>
-                  <CheckBox
-                    onValueChange={() => handleClickCheck(5)}
-                    value={dayList.includes(5)}
-                  />
-                  <Text>Saturday</Text>
-                  <CheckBox
-                    onValueChange={() => handleClickCheck(6)}
-                    value={dayList.includes(6)}
-                  />
-                  <Text>Sunday</Text>
-                  <CheckBox
-                    onValueChange={() => handleClickCheck(7)}
-                    value={dayList.includes(7)}
-                  />
-                </>
-              )}
-            />
-
-            {errors.time && (
-              <Text style={[signinStyles.text, { color: "red" }]}>
-                {errors.time.message}
-              </Text>
-            )}
-
-            <Controller
-              control={control}
-              name="start_date"
-              render={({ field: { onChange, value } }) => (
-                <DateTimePicker
-                  value={new Date()}
-                  mode="date"
-                  onChange={() => handleEditTime}
-                />
-              )}
-            />
-            {errors.start_date && (
-              <Text style={[signinStyles.text, { color: "red" }]}>
-                {errors.start_date.message}
-              </Text>
-            )}
-
-            <Controller
-              control={control}
-              name="end_date"
-              render={({ field: { onChange, value } }) => (
-                <DateTimePicker
-                  value={new Date()}
-                  mode="date"
-                  onChange={() => handleEditTime}
-                />
-              )}
-            />
-            {errors.end_date && (
-              <Text style={[signinStyles.text, { color: "red" }]}>
-                {errors.end_date.message}
-              </Text>
-            )}
-
             <TouchableOpacity
               onPress={() => {
                 handleSubmit(onSubmit)();

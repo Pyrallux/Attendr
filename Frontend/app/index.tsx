@@ -27,19 +27,18 @@ export default function Home() {
   if (userId === -1) {
     return <Redirect href="/signin"></Redirect>;
   }
-
   // TODO remove set lat and long values
   return (
     <>
       <View style={homeStyles.bg}>
-        <View style={homeStyles.bg}>
-          <LinearGradient
-            colors={["#0f9679", "#292929"]}
-            start={[1, 0]}
-            end={[0, 0]}
-            locations={[0, 1]}
-            style={{ flex: 1 }}
-          >
+        <LinearGradient
+          colors={["#0f9679", "#292929"]}
+          start={[1, 0]}
+          end={[0, 0]}
+          locations={[0, 1]}
+          style={{ flex: 1 }}
+        >
+          <View style={homeStyles.bg}>
             <View style={homeStyles.view}>
               <View style={homeStyles.box}>
                 <Text style={[homeStyles.timeText, { fontFamily: "Jersey10" }]}>
@@ -48,21 +47,22 @@ export default function Home() {
                 <Text style={homeStyles.timeText}>00:00 </Text>
               </View>
             </View>
-          </LinearGradient>
-          <DistanceMap eventLat={10} eventLong={20}></DistanceMap>
-          <View style={homeStyles.view}>
-            <View style={homeStyles.box}>
-              <Text style={[homeStyles.timeText, { fontFamily: "Jersey10" }]}>
-                Time till next class:{" "}
-              </Text>
-              <Text style={homeStyles.timeText}>00:00 </Text>
+
+            <View style={homeStyles.view}>
+              <View style={homeStyles.box}>
+                <Text style={[homeStyles.timeText, { fontFamily: "Jersey10" }]}>
+                  Time till next class:{" "}
+                </Text>
+                <Text style={homeStyles.timeText}>00:00 </Text>
+              </View>
             </View>
+            {isAtEvent && (
+              <Button title="Check In" onPress={handleCheckIn}></Button>
+            )}
           </View>
-          {isAtEvent && (
-            <Button title="Check In" onPress={handleCheckIn}></Button>
-          )}
-        </View>
-        <BottomBar></BottomBar>
+          <DistanceMap eventLat={10} eventLong={20}></DistanceMap>
+          <BottomBar></BottomBar>
+        </LinearGradient>
       </View>
     </>
   );

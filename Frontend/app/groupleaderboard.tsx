@@ -6,6 +6,7 @@ import { getGroups, getUserDetail } from "@/api/api";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "./_layout";
 import { Redirect, useRouter } from "expo-router";
+import { addScheduleStyles } from "../styles/addScheduleStyles";
 
 interface Group {
   id: number;
@@ -46,7 +47,16 @@ export default function Groups() {
   }
   return (
     <>
-      <View style={groupsStyles.bg}>
+      <View style={addScheduleStyles.bg}>
+        <View style={addScheduleStyles.bg}></View>
+        <BottomBar></BottomBar>
+      </View>
+    </>
+  );
+}
+
+{
+  /* <View style={groupsStyles.bg}>
         <View style={groupsStyles.bg}>
           <View style={groupsStyles.container}>
             <View style={groupsStyles.content}>
@@ -74,7 +84,5 @@ export default function Groups() {
           </View>
         </View>
       </View>
-      <BottomBar></BottomBar>
-    </>
-  );
+      <BottomBar></BottomBar> */
 }

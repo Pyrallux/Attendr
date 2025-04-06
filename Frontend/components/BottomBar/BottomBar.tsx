@@ -9,13 +9,15 @@ export default function BottomBar() {
     <View style={styles.view}>
       <View style={styles.box}>
         <Pressable onPress={() => router.navigate("/groups")}>
-          <Image source={require("../../assets/images/bigGroups.png")}></Image>
+          <Image source={require("../../assets/images/BWgroupNEW.png")}></Image>
         </Pressable>
         <Pressable onPress={() => router.navigate("/")}>
-          <Image source={require("../../assets/images/bigHOME.png")}></Image>
+          <Image source={require("../../assets/images/bigHOMENEW.png")}></Image>
         </Pressable>
         <Pressable onPress={() => router.navigate("/profile")}>
-          <Image source={require("../../assets/images/bigProfile.png")}></Image>
+          <Image
+            source={require("../../assets/images/bigProfileNEW.png")}
+          ></Image>
         </Pressable>
       </View>
     </View>

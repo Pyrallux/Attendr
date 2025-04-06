@@ -34,6 +34,13 @@ interface Course {
   longitude: number;
 }
 
+interface Event {
+  id?: number;
+  name: string;
+  date_time: string;
+  user_id: number;
+}
+
 const api = axios.create({
   baseURL: databaseURL,
 });
@@ -93,6 +100,25 @@ export const updateCourse = async (course: Course) => {
 };
 export const deleteCourse = async (id: number) => {
   return await api.delete(`/courses/${id}`);
+};
+
+// Events API
+export const getEvents = async () => {
+  const response = await api.get("/events/");
+  return response.data;
+};
+export const getEventDetail = async (id: number) => {
+  const response = await api.get(`/events/${id}`);
+  return response.data;
+};
+export const addEvent = async (event: Event) => {
+  return await api.post("/events/", event);
+};
+export const updateEvent = async (event: Event) => {
+  return await api.put(`/events/${event.id}`, event);
+};
+export const deleteEvent = async (id: number) => {
+  return await api.delete(`/events/${id}`);
 };
 
 export default api;

@@ -29,6 +29,7 @@ import DateTimePicker, {
 } from "@react-native-community/datetimepicker";
 import SelectionMap from "../components/SelectionMap";
 import { format } from "date-fns";
+import generateEvents from "../components/eventgenbutton";
 
 interface Course {
   id?: number;
@@ -95,7 +96,7 @@ export default function AddCourse() {
     };
     await addCourseMutation(newCourse);
     queryClient.invalidateQueries(["getCourseList"]);
-    router.navigate("/schedule");
+    generateEvents();
   };
 
   const handleName = (text: string) => {

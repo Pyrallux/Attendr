@@ -5,10 +5,12 @@ import {
   Button,
   TouchableOpacity,
   ImageBackground,
+  ScrollView,
 } from "react-native";
 import { useContext, useState } from "react";
 import { AppContext } from "./_layout";
 import { signinStyles } from "../styles/signinStyles";
+import { addScheduleStyles } from "../styles/addScheduleStyles";
 import {
   QueryClient,
   useMutation,
@@ -96,133 +98,135 @@ export default function AddCourse() {
 
   return (
     <>
-      <View style={signinStyles.bg}>
-        <View style={signinStyles.logo}>
-          <Text style={[signinStyles.logoText, { fontFamily: "Jersey10" }]}>
-            Attendr
-          </Text>
-        </View>
-        <View style={signinStyles.content}>
-          <View style={signinStyles.box}>
-            <Text style={[signinStyles.header, { fontFamily: "Jersey10" }]}>
-              Enter a New Course
+      <ScrollView>
+        <View style={signinStyles.bg}>
+          <View style={signinStyles.logo}>
+            <Text style={[signinStyles.logoText, { fontFamily: "Jersey10" }]}>
+              Attendr
             </Text>
-
-            <Text style={signinStyles.text}>Name</Text>
-            <Controller
-              control={control}
-              name="name"
-              render={({ field: { onChange, value } }) => (
-                <TextInput
-                  style={signinStyles.border}
-                  placeholderTextColor="gray"
-                  onChangeText={onChange}
-                  value={value}
-                />
-              )}
-            />
-            {errors.name && (
-              <Text style={[signinStyles.text, { color: "red" }]}>
-                {errors.name.message}
+          </View>
+          <View style={signinStyles.content}>
+            <View style={addScheduleStyles.box}>
+              <Text style={[signinStyles.header, { fontFamily: "Jersey10" }]}>
+                Enter a New Course
               </Text>
-            )}
-            <Controller
-              control={control}
-              name="time"
-              render={({ field: { onChange, value } }) => (
-                <DateTimePicker
-                  value={new Date()}
-                  mode="time"
-                  onChange={() => handleEditTime}
-                />
-              )}
-            />
-            {errors.time && (
-              <Text style={[signinStyles.text, { color: "red" }]}>
-                {errors.time.message}
-              </Text>
-            )}
-            <Controller
-              control={control}
-              name="days"
-              render={({ field: { onChange, value } }) => (
-                <>
-                  <Text>Monday</Text>
-                  <CheckBox
-                    onValueChange={() => handleClickCheck(1)}
-                    value={dayList.includes(1)}
-                  />
-                  <Text>Tuesday</Text>
-                  <CheckBox
-                    onValueChange={() => handleClickCheck(2)}
-                    value={dayList.includes(2)}
-                  />
-                  <Text>Wednesday</Text>
-                  <CheckBox
-                    onValueChange={() => handleClickCheck(3)}
-                    value={dayList.includes(3)}
-                  />
-                  <Text>Thursday</Text>
-                  <CheckBox
-                    onValueChange={() => handleClickCheck(4)}
-                    value={dayList.includes(4)}
-                  />
-                  <Text>Friday</Text>
-                  <CheckBox
-                    onValueChange={() => handleClickCheck(5)}
-                    value={dayList.includes(5)}
-                  />
-                  <Text>Saturday</Text>
-                  <CheckBox
-                    onValueChange={() => handleClickCheck(6)}
-                    value={dayList.includes(6)}
-                  />
-                  <Text>Sunday</Text>
-                  <CheckBox
-                    onValueChange={() => handleClickCheck(7)}
-                    value={dayList.includes(7)}
-                  />
-                </>
-              )}
-            />
 
-            {errors.time && (
-              <Text style={[signinStyles.text, { color: "red" }]}>
-                {errors.time.message}
-              </Text>
-            )}
-
-            <TouchableOpacity
-              onPress={() => {
-                handleSubmit(onSubmit)();
-              }}
-              style={{ marginTop: 20 }}
-            >
-              <ImageBackground
-                source={require("../assets/images/submitButton.png")} // replace with your actual path
-                style={{
-                  width: 200,
-                  height: 60,
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-                imageStyle={{ borderRadius: 10 }} // optional rounded corners
-              >
-                <Text
-                  style={{
-                    color: "white",
-                    fontSize: 20,
-                    fontFamily: "Jersey10",
-                    paddingBottom: 10,
-                  }}
-                >
-                  Submit
+              <Text style={signinStyles.text}>Name</Text>
+              <Controller
+                control={control}
+                name="name"
+                render={({ field: { onChange, value } }) => (
+                  <TextInput
+                    style={signinStyles.border}
+                    placeholderTextColor="gray"
+                    onChangeText={onChange}
+                    value={value}
+                  />
+                )}
+              />
+              {errors.name && (
+                <Text style={[signinStyles.text, { color: "red" }]}>
+                  {errors.name.message}
                 </Text>
-              </ImageBackground>
-            </TouchableOpacity>
+              )}
+              <Controller
+                control={control}
+                name="time"
+                render={({ field: { onChange, value } }) => (
+                  <DateTimePicker
+                    value={new Date()}
+                    mode="time"
+                    onChange={() => handleEditTime}
+                  />
+                )}
+              />
+              {errors.time && (
+                <Text style={[signinStyles.text, { color: "red" }]}>
+                  {errors.time.message}
+                </Text>
+              )}
+              <Controller
+                control={control}
+                name="days"
+                render={({ field: { onChange, value } }) => (
+                  <>
+                    <Text>Monday</Text>
+                    <CheckBox
+                      onValueChange={() => handleClickCheck(1)}
+                      value={dayList.includes(1)}
+                    />
+                    <Text>Tuesday</Text>
+                    <CheckBox
+                      onValueChange={() => handleClickCheck(2)}
+                      value={dayList.includes(2)}
+                    />
+                    <Text>Wednesday</Text>
+                    <CheckBox
+                      onValueChange={() => handleClickCheck(3)}
+                      value={dayList.includes(3)}
+                    />
+                    <Text>Thursday</Text>
+                    <CheckBox
+                      onValueChange={() => handleClickCheck(4)}
+                      value={dayList.includes(4)}
+                    />
+                    <Text>Friday</Text>
+                    <CheckBox
+                      onValueChange={() => handleClickCheck(5)}
+                      value={dayList.includes(5)}
+                    />
+                    <Text>Saturday</Text>
+                    <CheckBox
+                      onValueChange={() => handleClickCheck(6)}
+                      value={dayList.includes(6)}
+                    />
+                    <Text>Sunday</Text>
+                    <CheckBox
+                      onValueChange={() => handleClickCheck(7)}
+                      value={dayList.includes(7)}
+                    />
+                  </>
+                )}
+              />
+
+              {errors.time && (
+                <Text style={[signinStyles.text, { color: "red" }]}>
+                  {errors.time.message}
+                </Text>
+              )}
+
+              <TouchableOpacity
+                onPress={() => {
+                  handleSubmit(onSubmit)();
+                }}
+                style={{ marginTop: 20 }}
+              >
+                <ImageBackground
+                  source={require("../assets/images/submitButton.png")} // replace with your actual path
+                  style={{
+                    width: 200,
+                    height: 60,
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                  imageStyle={{ borderRadius: 10 }} // optional rounded corners
+                >
+                  <Text
+                    style={{
+                      color: "white",
+                      fontSize: 20,
+                      fontFamily: "Jersey10",
+                      paddingBottom: 10,
+                    }}
+                  >
+                    Submit
+                  </Text>
+                </ImageBackground>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
-      </View>
+      </ScrollView>
     </>
   );
 }

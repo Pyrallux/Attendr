@@ -3,7 +3,7 @@ import BottomBar from "@/components/BottomBar/BottomBar";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
-import { Button, Text, View } from "react-native";
+import { Button, ScrollView, Text, View } from "react-native";
 
 interface Course {
   id: number;
@@ -47,24 +47,26 @@ export default function Schedule() {
 
   return (
     <>
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        {courseData ? (
-          courseListNames.map((s: string, id) => (
-            <View key={id}>
-              <Button title={s} onPress={() => handleClickCourse(id)} />
-            </View>
-          ))
-        ) : (
-          <Text>Loading...</Text>
-        )}
-        <Button title="+ Add New Course" onPress={() => handleAddCourse()} />
-      </View>
+      <ScrollView style={{ paddingTop: 100 }}>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {courseData ? (
+            courseListNames.map((s: string, id) => (
+              <View key={id}>
+                <Button title={s} onPress={() => handleClickCourse(id)} />
+              </View>
+            ))
+          ) : (
+            <Text>Loading...</Text>
+          )}
+          <Button title="+ Add New Course" onPress={() => handleAddCourse()} />
+        </View>
+      </ScrollView>
       <BottomBar />
     </>
   );

@@ -97,23 +97,6 @@ export default function Home() {
           style={{ flex: 1 }}
         >
           <View style={homeStyles.bg}>
-            <View style={homeStyles.view}>
-              <View style={homeStyles.box}>
-                <Text style={[homeStyles.timeText, { fontFamily: "Jersey10" }]}>
-                  Time till next class:{" "}
-                </Text>
-                <Text style={homeStyles.timeText}>00:00 </Text>
-              </View>
-            </View>
-
-            <View style={homeStyles.view}>
-              <View style={homeStyles.box}>
-                <Text style={[homeStyles.timeText, { fontFamily: "Jersey10" }]}>
-                  Time till next class:{" "}
-                </Text>
-                <Text style={homeStyles.timeText}>00:00 </Text>
-              </View>
-            </View>
             {isAtEvent && (
               <TouchableOpacity
                 onPressIn={() => setIsPressed(true)}

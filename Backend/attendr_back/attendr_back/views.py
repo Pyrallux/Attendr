@@ -52,7 +52,8 @@ from rest_framework import status
 #         warehouse.delete()
 #         return Response(status=status.HTTP_204_NO_CONTENT)
 
-#Course views
+
+# Course views
 @api_view(["GET", "POST", "PUT", "DELETE"])
 def course_list(request, format=None):
     if request.method == "GET":
@@ -98,7 +99,7 @@ def course_detail(request, id, format=None):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-#User views
+# User views
 @api_view(["GET", "POST", "PUT", "DELETE"])
 def user_list(request, format=None):
     if request.method == "GET":
@@ -144,7 +145,7 @@ def user_detail(request, id, format=None):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-#Group views
+# Group views
 @api_view(["GET", "POST", "PUT", "DELETE"])
 def group_list(request, format=None):
     if request.method == "GET":
@@ -188,9 +189,9 @@ def group_detail(request, id, format=None):
     elif request.method == "DELETE":
         group.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-    
 
-#Day views
+
+# Day views
 @api_view(["GET", "POST", "PUT", "DELETE"])
 def day_list(request, format=None):
     if request.method == "GET":
@@ -233,4 +234,50 @@ def day_detail(request, id, format=None):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == "DELETE":
         day.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+# Event views
+@api_view(["GET", "POST", "PUT", "DELETE"])
+def event_list(request, format=None):
+    if request.method == "GET":
+        event = Event.objects.all()
+        serializer = EventSerializer(event, many=True)
+        return Response(serializer.data)
+    elif request.method == "POST":
+        serializer = EventSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == "PUT":
+        serializer = EventSerializer(event, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == "DELETE":
+        event = Event.objects.all()
+        event.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(["GET", "PUT", "DELETE"])
+def event_detail(request, id, format=None):
+    try:
+        event = Event.objects.get(pk=id)
+    except Event.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == "GET":
+        serializer = EventSerializer(event)
+        return Response(serializer.data)
+    elif request.method == "PUT":
+        serializer = EventSerializer(event, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == "DELETE":
+        event.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

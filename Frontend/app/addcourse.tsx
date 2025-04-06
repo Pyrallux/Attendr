@@ -50,6 +50,8 @@ export default function AddCourse() {
     name: yup.string().max(20).required("*Name is Required"),
     time: yup.string().required("*Time input is required"),
     days: yup.array().of(yup.number().max(7)).min(1),
+    start_date: yup.date().min(new Date()).required("*Start date is required"),
+    end_date: yup.date().required("*End date is required"),
   });
   const {
     control,
@@ -189,6 +191,40 @@ export default function AddCourse() {
             {errors.time && (
               <Text style={[signinStyles.text, { color: "red" }]}>
                 {errors.time.message}
+              </Text>
+            )}
+
+            <Controller
+              control={control}
+              name="start_date"
+              render={({ field: { onChange, value } }) => (
+                <DateTimePicker
+                  value={new Date()}
+                  mode="date"
+                  onChange={() => handleEditTime}
+                />
+              )}
+            />
+            {errors.start_date && (
+              <Text style={[signinStyles.text, { color: "red" }]}>
+                {errors.start_date.message}
+              </Text>
+            )}
+
+            <Controller
+              control={control}
+              name="end_date"
+              render={({ field: { onChange, value } }) => (
+                <DateTimePicker
+                  value={new Date()}
+                  mode="date"
+                  onChange={() => handleEditTime}
+                />
+              )}
+            />
+            {errors.end_date && (
+              <Text style={[signinStyles.text, { color: "red" }]}>
+                {errors.end_date.message}
               </Text>
             )}
 

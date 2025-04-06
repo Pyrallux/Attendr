@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { useContext, useState } from "react";
 import { AppContext } from "./_layout";
-import { signupStyles } from "./signupStyles";
+import { signupStyles } from "../styles/signupStyles";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -118,11 +118,11 @@ export default function SignUp() {
     setUserId(
       users.filter((u: User) => u.username === formData.username)[0].id
     );
-    router.navigate("/home");
+    router.replace("/");
   };
 
   const [fontsLoaded] = useFonts({
-    Jersey10: require("./../assets/fonts/Jersey10-Regular.ttf"),
+    Jersey10: require("../assets/fonts/Jersey10-Regular.ttf"),
   });
 
   if (!fontsLoaded) {
@@ -148,7 +148,7 @@ export default function SignUp() {
               <Text style={signupStyles.logoText}>Attendr</Text>
               <Image
                 style={{ marginTop: 50, marginLeft: 5 }}
-                source={require("./../assets/images/LOGO.png")}
+                source={require("../assets/images/LOGO.png")}
               ></Image>
             </View>
             <View style={signupStyles.content}>

@@ -1,11 +1,11 @@
 import BottomBar from "@/components/BottomBar/BottomBar";
-import { groupsStyles } from "./groupsStyles";
+import { groupsStyles } from "../styles/groupsStyles";
 import { View, Button } from "react-native";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { getGroups, getUserDetail } from "@/api/api";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "./_layout";
-import { useRouter } from "expo-router";
+import { Redirect, useRouter } from "expo-router";
 
 interface Group {
   id: number;
@@ -41,6 +41,9 @@ export default function Groups() {
     router.navigate("/editgroup");
   };
 
+  if (userId === -1) {
+    return <Redirect href="/signin"></Redirect>;
+  }
   return (
     <>
       <View style={groupsStyles.bg}>
@@ -70,8 +73,8 @@ export default function Groups() {
             </View>
           </View>
         </View>
-        <BottomBar />
       </View>
+      <BottomBar></BottomBar>
     </>
   );
 }

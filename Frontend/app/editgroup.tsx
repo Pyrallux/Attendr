@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { useContext, useState, useEffect } from "react";
 import { AppContext } from "./_layout";
-import { signinStyles } from "./signinStyles";
+import { signinStyles } from "../styles/signinStyles";
 import {
   QueryClient,
   useMutation,
@@ -92,7 +92,7 @@ export default function EditGroup() {
   };
 
   const [fontsLoaded] = useFonts({
-    Jersey10: require("./../assets/fonts/Jersey10-Regular.ttf"),
+    Jersey10: require("../assets/fonts/Jersey10-Regular.ttf"),
   });
 
   if (!fontsLoaded) {
@@ -138,7 +138,7 @@ export default function EditGroup() {
               style={{ marginTop: 20 }}
             >
               <ImageBackground
-                source={require("./../assets/images/submitButton.png")} // replace with your actual path
+                source={require("../assets/images/submitButton.png")} // replace with your actual path
                 style={{
                   width: 200,
                   height: 60,

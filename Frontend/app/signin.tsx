@@ -19,6 +19,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "expo-router";
 import { useFonts } from "expo-font";
 import { LinearGradient } from "expo-linear-gradient";
+import * as SystemUI from "expo-system-ui";
 
 interface User {
   id: number;
@@ -35,6 +36,8 @@ interface Login {
   username: string;
   password: string;
 }
+
+SystemUI.setBackgroundColorAsync("#292929");
 
 export default function SignIn() {
   const { setUser, setUserId } = useContext(AppContext);

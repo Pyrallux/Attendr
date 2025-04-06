@@ -35,10 +35,10 @@ export default function Profile() {
   }
   return (
     <>
-      <View style={profileStyles.flex}>
+      <View style={profileStyles.bg}>
         <View style={profileStyles.bg}>
-          <View style={profileStyles.container}>
-            <View style={profileStyles.content}>
+          <View style={[profileStyles.view, { paddingTop: 500 }]}>
+            <View style={profileStyles.box}>
               <Image
                 source={require("../assets/images/placeHolderIcon.png")}
               ></Image>

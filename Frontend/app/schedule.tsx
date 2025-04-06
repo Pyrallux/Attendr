@@ -12,6 +12,7 @@ import {
   ImageBackground,
 } from "react-native";
 import { scheduleStyles } from "../styles/scheduleStyles";
+import EventGenButton from "@/components/eventgenbutton";
 
 interface Course {
   id: number;
@@ -101,6 +102,8 @@ export default function Schedule() {
               ) : (
                 <Text style={scheduleStyles.timeText}>Loading...</Text>
               )}
+
+              <EventGenButton></EventGenButton>
               <TouchableOpacity
                 onPress={() => {
                   handleAddCourse();

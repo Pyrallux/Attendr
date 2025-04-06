@@ -121,7 +121,7 @@ export default function Groups() {
                   </View>
                 );
               })}
-              <View style={{ paddingTop: 30 }}>
+              <View style={{ paddingTop: 0 }}>
                 <TouchableOpacity
                   onPress={() => {
                     router.navigate("/addgroup");

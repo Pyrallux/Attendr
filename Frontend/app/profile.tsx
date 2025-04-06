@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "./_layout";
 import { useMutation } from "@tanstack/react-query";
 import { getUserDetail } from "@/api/api";
-import { Redirect } from "expo-router";
+import { Link, Redirect } from "expo-router";
 
 export default function Profile() {
   const [fontsLoaded] = useFonts({
@@ -47,7 +47,7 @@ export default function Profile() {
             </View>
             <View style={[profileStyles.view, { paddingTop: 400 }]}>
               <View style={profileStyles.box}>
-                <Text>STATSFASOIDJOIASJDsidOSA</Text>
+                <Link href="/schedule">Setup Schedule</Link>
               </View>
             </View>
           </View>

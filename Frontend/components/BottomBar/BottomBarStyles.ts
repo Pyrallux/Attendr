@@ -19,6 +19,6 @@ export const styles = StyleSheet.create({
     display: "flex",
     borderRadius: 44,
     position: "absolute",
-    top: 350,
+    top: -250,
   },
 });

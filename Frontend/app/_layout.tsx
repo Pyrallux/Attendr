@@ -10,6 +10,8 @@ export const AppContext = createContext<{
   setUserId: (newValue: number) => void;
   activeGroupId: number;
   setActiveGroupId: (newValue: number) => void;
+  isAtEvent: boolean;
+  setIsAtEvent: (newValue: boolean) => void;
 }>({
   user: "",
   setUser: () => undefined,
@@ -17,6 +19,8 @@ export const AppContext = createContext<{
   setUserId: () => undefined,
   activeGroupId: -1,
   setActiveGroupId: () => undefined,
+  isAtEvent: false,
+  setIsAtEvent: () => undefined,
 });
 
 const client = new QueryClient();
@@ -25,6 +29,7 @@ export default function RootLayout() {
   const [user, setUser] = useState<string>("");
   const [userId, setUserId] = useState<number>(-1);
   const [activeGroupId, setActiveGroupId] = useState<number>(-1);
+  const [isAtEvent, setIsAtEvent] = useState<boolean>(false);
 
   return (
     <>
@@ -37,6 +42,8 @@ export default function RootLayout() {
             setUserId,
             activeGroupId,
             setActiveGroupId,
+            isAtEvent,
+            setIsAtEvent,
           }}
         >
           <Stack
@@ -49,7 +56,10 @@ export default function RootLayout() {
             <Stack.Screen name="signin" />
             <Stack.Screen name="signup" />
             <Stack.Screen name="profile" />
+            <Stack.Screen name="setup" />
             <Stack.Screen name="schedule" />
+            <Stack.Screen name="addcourse" />
+            <Stack.Screen name="editcourse" />
             <Stack.Screen name="groups" />
             <Stack.Screen name="groupleaderboard" />
             <Stack.Screen name="addgroup" />

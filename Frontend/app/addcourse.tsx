@@ -113,22 +113,71 @@ export default function AddCourse() {
                 Enter a New Course
               </Text>
 
-              <Text style={signinStyles.text}>Name</Text>
-              <Controller
-                control={control}
-                name="name"
-                render={({ field: { onChange, value } }) => (
-                  <TextInput
-                    style={signinStyles.border}
-                    placeholderTextColor="gray"
-                    onChangeText={onChange}
-                    value={value}
-                  />
-                )}
-              />
-              {errors.name && (
-                <Text style={[signinStyles.text, { color: "red" }]}>
-                  {errors.name.message}
+            {errors.time && (
+              <Text style={[signinStyles.text, { color: "red" }]}>
+                {errors.time.message}
+              </Text>
+            )}
+
+            <Controller
+              control={control}
+              name="start_date"
+              render={({ field: { onChange, value } }) => (
+                <DateTimePicker
+                  value={new Date()}
+                  mode="date"
+                  onChange={() => handleEditTime}
+                />
+              )}
+            />
+            {errors.start_date && (
+              <Text style={[signinStyles.text, { color: "red" }]}>
+                {errors.start_date.message}
+              </Text>
+            )}
+
+            <Controller
+              control={control}
+              name="end_date"
+              render={({ field: { onChange, value } }) => (
+                <DateTimePicker
+                  value={new Date()}
+                  mode="date"
+                  onChange={() => handleEditTime}
+                />
+              )}
+            />
+            {errors.end_date && (
+              <Text style={[signinStyles.text, { color: "red" }]}>
+                {errors.end_date.message}
+              </Text>
+            )}
+
+            <TouchableOpacity
+              onPress={() => {
+                handleSubmit(onSubmit)();
+              }}
+              style={{ marginTop: 20 }}
+            >
+              <ImageBackground
+                source={require("../assets/images/submitButton.png")} // replace with your actual path
+                style={{
+                  width: 200,
+                  height: 60,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+                imageStyle={{ borderRadius: 10 }} // optional rounded corners
+              >
+                <Text
+                  style={{
+                    color: "white",
+                    fontSize: 20,
+                    fontFamily: "Jersey10",
+                    paddingBottom: 10,
+                  }}
+                >
+                  Submit
                 </Text>
               )}
               <Controller

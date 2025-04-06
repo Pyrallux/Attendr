@@ -214,7 +214,7 @@ export default function AddCourse() {
                 )}
               />
 
-              <Text>Recurrence Schedule:</Text>
+              <Text style={addScheduleStyles.text}>Recurrence Schedule:</Text>
               <Controller
                 control={control}
                 name="days"

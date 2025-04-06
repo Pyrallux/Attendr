@@ -118,12 +118,12 @@ export default function EventGenButton() {
         <ImageBackground
           source={
             isPressed
-              ? require("./../assets/images/submitButton2.png")
-              : require("./../assets/images/submitButton.png")
+              ? require("./../assets/images/groupBG.png")
+              : require("./../assets/images/groupBG.png")
           }
           style={{
             width: 200,
-            height: 60,
+            height: 80,
             justifyContent: "center",
             alignItems: "center",
           }}

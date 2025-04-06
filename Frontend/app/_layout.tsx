@@ -56,7 +56,10 @@ export default function RootLayout() {
             <Stack.Screen name="signin" />
             <Stack.Screen name="signup" />
             <Stack.Screen name="profile" />
+            <Stack.Screen name="setup" />
             <Stack.Screen name="schedule" />
+            <Stack.Screen name="addcourse" />
+            <Stack.Screen name="editcourse" />
             <Stack.Screen name="groups" />
             <Stack.Screen name="groupleaderboard" />
             <Stack.Screen name="addgroup" />

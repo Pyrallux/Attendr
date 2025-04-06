@@ -26,9 +26,11 @@ export default function Home() {
   if (userId === -1) {
     return <Redirect href="/signin"></Redirect>;
   }
+
+  // TODO remove set lat and long values
   return (
     <>
-      <DistanceMap></DistanceMap>
+      <DistanceMap eventLat={10} eventLong={20}></DistanceMap>
       <View style={homeStyles.view}>
         <View style={homeStyles.box}>
           <Text style={[homeStyles.timeText, { fontFamily: "Jersey10" }]}>

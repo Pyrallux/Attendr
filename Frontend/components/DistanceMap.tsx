@@ -4,7 +4,12 @@ import * as Location from "expo-location";
 import { StyleSheet } from "react-native";
 import { AppContext } from "@/app/_layout";
 
-export default function DistanceMap(eventLat: number, eventLong: number) {
+interface Props {
+  eventLat: number;
+  eventLong: number;
+}
+
+export default function DistanceMap(props: Props) {
   const { setIsAtEvent } = useContext(AppContext);
   const [latitude, setLatitude] = useState<number>(0);
   const [longitude, setLongitude] = useState<number>(0);

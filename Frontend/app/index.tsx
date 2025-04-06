@@ -1,6 +1,13 @@
 import BottomBar from "@/components/BottomBar/BottomBar";
 import { homeStyles } from "../styles/homeStyles";
-import { Text, View, StyleSheet, Button } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Button,
+  TouchableOpacity,
+  ImageBackground,
+} from "react-native";
 import { useFonts } from "expo-font";
 import { useContext, useEffect, useState } from "react";
 import React from "react";
@@ -27,6 +34,12 @@ export default function Home() {
   if (userId === -1) {
     return <Redirect href="/signin"></Redirect>;
   }
+
+  const [isPressed, setIsPressed] = useState(false);
+
+  const handlePress = () => {
+    setTimeout(() => setIsPressed(false), 75);
+  };
   // TODO remove set lat and long values
   return (
     <>
@@ -57,7 +70,42 @@ export default function Home() {
               </View>
             </View>
             {isAtEvent && (
-              <Button title="Check In" onPress={handleCheckIn}></Button>
+              <TouchableOpacity
+                onPressIn={() => setIsPressed(true)}
+                onPressOut={() => {
+                  setIsPressed(false);
+                }}
+                onPress={() => {
+                  handleCheckIn();
+                }}
+                style={{ marginTop: 20 }}
+              >
+                <ImageBackground
+                  source={
+                    isPressed
+                      ? require("./../assets/images/submitButton2.png")
+                      : require("./../assets/images/submitButton.png")
+                  }
+                  style={{
+                    width: 200,
+                    height: 60,
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                  imageStyle={{ borderRadius: 10 }}
+                >
+                  <Text
+                    style={{
+                      color: "white",
+                      fontSize: 20,
+                      fontFamily: "Jersey10",
+                      transform: [{ translateY: isPressed ? 10 : -5 }],
+                    }}
+                  >
+                    Submit
+                  </Text>
+                </ImageBackground>
+              </TouchableOpacity>
             )}
           </View>
           <DistanceMap eventLat={10} eventLong={20}></DistanceMap>

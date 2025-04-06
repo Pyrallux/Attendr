@@ -38,13 +38,13 @@ export const profileStyles = StyleSheet.create({
   },
   box: {
     height: 128,
-    flexDirection: "column",
+
     width: 375,
     gap: 25,
     backgroundColor: "#4b4b4b",
     justifyContent: "center",
     alignItems: "center",
-    display: "flex",
+
     borderRadius: 44,
   },
   flex: {

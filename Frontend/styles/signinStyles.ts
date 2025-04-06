@@ -1,46 +1,50 @@
 import { StyleSheet } from "react-native";
 
-export const signupStyles = StyleSheet.create({
+export const signinStyles = StyleSheet.create({
   container: {
     justifyContent: "space-between",
   },
   content: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "#4b4b4b",
+    backgroundColor: "#46e56f",
     paddingTop: 0,
 
     borderBlockColor: "black",
   },
   bg: {
     flex: 1,
-    backgroundColor: "#4b4b4b",
+    backgroundColor: "#46e56f",
   },
   border: {
-    borderBlockColor: "white",
-    borderWidth: 1,
+    borderColor: "white",
+    borderWidth: 2,
     color: "white",
-    fontSize: 12,
+    fontSize: 24,
+    fontFamily: "Jersey10",
   },
   text: {
     color: "white",
-    fontSize: 12,
+    fontSize: 24,
+    fontFamily: "Jersey10",
   },
   header: {
     color: "white",
-    fontSize: 32,
+    fontSize: 48,
+    fontFamily: "Jersey10",
   },
   box: {
-    height: 750,
+    height: 710,
     width: "100%",
     backgroundColor: "#292929",
-    justifyContent: "center",
     alignItems: "center",
     display: "flex",
-    borderRadius: 44,
+    borderTopLeftRadius: 44,
+    borderTopRightRadius: 44,
     flexDirection: "column",
     gap: 20,
-    paddingBottom: 200,
+    paddingBottom: 100,
+    paddingTop: 40,
   },
   logo: {
     justifyContent: "center",
@@ -48,8 +52,8 @@ export const signupStyles = StyleSheet.create({
   },
   logoText: {
     color: "white",
-    fontSize: 32,
+    fontSize: 64,
     paddingTop: 80,
-    fontFamily: "",
+    fontFamily: "Jersey10",
   },
 });

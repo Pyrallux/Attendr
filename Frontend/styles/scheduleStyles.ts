@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const homeStyles = StyleSheet.create({
+export const scheduleStyles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
@@ -37,7 +37,7 @@ export const homeStyles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     display: "flex",
-    paddingTop: 700,
+    paddingTop: 600,
   },
 
   timeText: {

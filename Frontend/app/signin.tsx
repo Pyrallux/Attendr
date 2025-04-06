@@ -1,15 +1,28 @@
-import { Text, View, TextInput, Button } from "react-native";
+import {
+  Text,
+  View,
+  TextInput,
+  Button,
+  TouchableOpacity,
+  ImageBackground,
+  Image,
+  ScrollView,
+} from "react-native";
 import { useContext, useState } from "react";
 import { AppContext } from "./_layout";
-import { signupStyles } from "./signupStyles";
-import { useQueryClient, useMutation } from "@tanstack/react-query";
+import { signinStyles } from "../styles/signinStyles";
+import { useMutation } from "@tanstack/react-query";
 import { getUsers } from "@/api/api";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "expo-router";
+import { useFonts } from "expo-font";
+import { LinearGradient } from "expo-linear-gradient";
+import * as SystemUI from "expo-system-ui";
 
 interface User {
+  id: number;
   first_name: string;
   last_name: string;
   username: string;
@@ -24,13 +37,14 @@ interface Login {
   password: string;
 }
 
+SystemUI.setBackgroundColorAsync("#292929");
+
 export default function SignIn() {
-  const { setUser } = useContext(AppContext);
+  const { setUser, setUserId } = useContext(AppContext);
   const [loginError, setLoginError] = useState<string>("");
-  const queryClient = useQueryClient();
   const router = useRouter();
 
-  const { mutateAsync: getUsersMutation, data: userData } = useMutation({
+  const { mutateAsync: getUsersMutation } = useMutation({
     mutationKey: ["SignInGetUsers"],
     mutationFn: () => getUsers(),
   });
@@ -42,7 +56,6 @@ export default function SignIn() {
   const {
     control,
     handleSubmit,
-    setValue,
     formState: { errors },
   } = useForm({
     mode: "onSubmit",
@@ -71,62 +84,152 @@ export default function SignIn() {
     }
 
     setUser(formData.username);
+    setUserId(
+      users.filter((u: User) => u.username === formData.username)[0].id
+    );
+    router.replace("/");
+  };
+
+  const [fontsLoaded] = useFonts({
+    Jersey10: require("../assets/fonts/Jersey10-Regular.ttf"),
+  });
+
+  if (!fontsLoaded) {
+    return undefined;
+  }
+
+  const [isPressed, setIsPressed] = useState(false);
+
+  const handlePress = () => {
+    setTimeout(() => setIsPressed(false), 75);
   };
 
   return (
     <>
-      <View style={signupStyles.bg}>
-        <View style={signupStyles.logo}>
-          <Text style={signupStyles.logoText}>Attendr</Text>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <View style={signinStyles.bg}>
+          <LinearGradient
+            colors={["#0f9679", "#46e56f"]}
+            start={[0.5, 0]}
+            end={[1, 1]}
+            locations={[0, 0.1]}
+          >
+            <View style={[signinStyles.logo, { flexDirection: "row" }]}>
+              <Text style={[signinStyles.logoText, { fontFamily: "Jersey10" }]}>
+                Attendr
+              </Text>
+              <Image
+                style={{ marginTop: 50, marginLeft: 5 }}
+                source={require("./../assets/images/LOGO.png")}
+              ></Image>
+            </View>
+            <View style={signinStyles.content}>
+              <View style={signinStyles.box}>
+                <LinearGradient
+                  colors={["#4b4b4b", "#292929"]}
+                  start={[0.5, 0]}
+                  end={[1, 1]}
+                  locations={[0, 0.1]}
+                  style={signinStyles.box}
+                >
+                  <Text
+                    style={[signinStyles.header, { fontFamily: "Jersey10" }]}
+                  >
+                    Sign In
+                  </Text>
+
+                  <Text style={signinStyles.text}>Username</Text>
+                  <Controller
+                    control={control}
+                    name="username"
+                    render={({ field: { onChange, value } }) => (
+                      <TextInput
+                        style={[signinStyles.border, { width: 225 }]}
+                        placeholder="doejohn2004"
+                        placeholderTextColor="gray"
+                        onChangeText={onChange}
+                        value={value}
+                      />
+                    )}
+                  />
+                  {errors.username && (
+                    <Text style={[signinStyles.text, { color: "red" }]}>
+                      {errors.username.message}
+                    </Text>
+                  )}
+
+                  <Text style={signinStyles.text}>Password</Text>
+                  <Controller
+                    control={control}
+                    name="password"
+                    render={({ field: { onChange, value } }) => (
+                      <TextInput
+                        style={[signinStyles.border, { width: 225 }]}
+                        secureTextEntry={true}
+                        onChangeText={onChange}
+                        value={value}
+                      />
+                    )}
+                  />
+                  {errors.password && (
+                    <Text style={[signinStyles.text, { color: "red" }]}>
+                      {errors.password.message}
+                    </Text>
+                  )}
+
+                  <TouchableOpacity
+                    onPressIn={() => setIsPressed(true)}
+                    onPressOut={() => {
+                      setIsPressed(false);
+                    }}
+                    onPress={() => {
+                      handleSubmit(onSubmit)();
+                      handlePress();
+                      setIsPressed(true);
+                    }}
+                    style={{ marginTop: 20 }}
+                  >
+                    <ImageBackground
+                      source={
+                        isPressed
+                          ? require("./../assets/images/submitButton2.png")
+                          : require("./../assets/images/submitButton.png")
+                      }
+                      style={{
+                        width: 200,
+                        height: 60,
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                      imageStyle={{ borderRadius: 10 }}
+                    >
+                      <Text
+                        style={{
+                          color: "white",
+                          fontSize: 20,
+                          fontFamily: "Jersey10",
+                          transform: [{ translateY: isPressed ? 10 : -5 }],
+                        }}
+                      >
+                        Submit
+                      </Text>
+                    </ImageBackground>
+                  </TouchableOpacity>
+                  <Text style={[signinStyles.text, { color: "red" }]}>
+                    {loginError}
+                  </Text>
+                  <Text
+                    onPress={() => router.navigate("/signup")}
+                    style={signinStyles.text}
+                  >
+                    Don't have an account? Click here to sign up.
+                  </Text>
+                </LinearGradient>
+              </View>
+            </View>
+          </LinearGradient>
         </View>
-        <View style={signupStyles.content}>
-          <View style={signupStyles.box}>
-            <Text style={signupStyles.header}>Sign Up</Text>
-
-            <Text>First Name</Text>
-
-            <Text>Username</Text>
-            <Controller
-              control={control}
-              name="username"
-              render={({ field: { onChange, value } }) => (
-                <TextInput
-                  style={signupStyles.border}
-                  placeholder="doejohn2004"
-                  onChangeText={onChange}
-                  value={value}
-                />
-              )}
-            />
-            {errors.username && (
-              <Text style={{ color: "red" }}>{errors.username.message}</Text>
-            )}
-
-            <Text>Password</Text>
-            <Controller
-              control={control}
-              name="password"
-              render={({ field: { onChange, value } }) => (
-                <TextInput
-                  style={signupStyles.border}
-                  secureTextEntry={true}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              )}
-            />
-            {errors.password && (
-              <Text style={{ color: "red" }}>{errors.password.message}</Text>
-            )}
-
-            <Button onPress={handleSubmit(onSubmit)} title="submit"></Button>
-            <Text style={{ color: "red" }}>{loginError}</Text>
-            <Text onPress={() => router.navigate("/signup")}>
-              Don't have an account? Click here to sign up.
-            </Text>
-          </View>
-        </View>
-      </View>
+      </ScrollView>
     </>
   );
 }

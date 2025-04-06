@@ -25,4 +25,12 @@ urlpatterns = [
     # path("db/warehouses/<int:id>", views.warehouse_detail),
     path("db/courses/", views.course_list),
     path("db/courses/<int:id>", views.course_detail),
+    path("db/users/", views.user_list),
+    path("db/users/<int:id>", views.user_detail),
+    path("db/groups/", views.group_list),
+    path("db/groups/<int:id>", views.group_detail),
+    path("db/days/", views.day_list),
+    path("db/days/<int:id>", views.day_detail),
+    path("db/events/", views.event_list),
+    path("db/events/<int:id>", views.event_detail),
 ]

@@ -140,6 +140,23 @@ export default function AddCourse() {
 
               <Controller
                 control={control}
+                name="start_date"
+                render={({ field: { onChange, value } }) => (
+                  <DateTimePicker
+                    value={new Date()}
+                    mode="date"
+                    onChange={() => handleEditTime}
+                  />
+                )}
+              />
+              {errors.start_date && (
+                <Text style={[signinStyles.text, { color: "red" }]}>
+                  {errors.start_date.message}
+                </Text>
+              )}
+
+              <Controller
+                control={control}
                 name="end_date"
                 render={({ field: { onChange, value } }) => (
                   <DateTimePicker
@@ -149,97 +166,9 @@ export default function AddCourse() {
                   />
                 )}
               />
-
-              <Controller
-                control={control}
-                name="time"
-                render={({ field: { onChange, value } }) => (
-                  <DateTimePicker
-                    value={new Date()}
-                    mode="time"
-                    onChange={() => handleEditTime}
-                  />
-                )}
-              />
-              <Controller
-                control={control}
-                name="days"
-                render={({ field: { onChange, value } }) => (
-                  <>
-                    <View style={{ flexDirection: "row" }}>
-                      <View style={{ flexDirection: "column", gap: 3 }}>
-                        <Text style={[addScheduleStyles.checkText]}>
-                          Monday
-                        </Text>
-                        <CheckBox
-                          onValueChange={() => handleClickCheck(1)}
-                          value={dayList.includes(1)}
-                        />
-                      </View>
-                      <View style={{ flexDirection: "column", gap: 3 }}>
-                        <Text style={[addScheduleStyles.checkText]}>
-                          Tuesday
-                        </Text>
-                        <CheckBox
-                          onValueChange={() => handleClickCheck(2)}
-                          value={dayList.includes(2)}
-                        />
-                      </View>
-                      <View style={{ flexDirection: "column", gap: 3 }}>
-                        <Text style={[addScheduleStyles.checkText]}>
-                          Wednesday
-                        </Text>
-                        <CheckBox
-                          onValueChange={() => handleClickCheck(3)}
-                          value={dayList.includes(3)}
-                        />
-                      </View>
-                      <View style={{ flexDirection: "column", gap: 3 }}>
-                        <Text style={[addScheduleStyles.checkText]}>
-                          Thursday
-                        </Text>
-                        <CheckBox
-                          onValueChange={() => handleClickCheck(4)}
-                          value={dayList.includes(4)}
-                        />
-                      </View>
-                    </View>
-                    <View style={{ flexDirection: "row" }}>
-                      <View style={{ flexDirection: "column", gap: 3 }}>
-                        <Text style={[addScheduleStyles.checkText]}>
-                          Friday
-                        </Text>
-                        <CheckBox
-                          onValueChange={() => handleClickCheck(5)}
-                          value={dayList.includes(5)}
-                        />
-                      </View>
-                      <View style={{ flexDirection: "column", gap: 3 }}>
-                        <Text style={[addScheduleStyles.checkText]}>
-                          Saturday
-                        </Text>
-                        <CheckBox
-                          onValueChange={() => handleClickCheck(6)}
-                          value={dayList.includes(6)}
-                        />
-                      </View>
-                      <View style={{ flexDirection: "column", gap: 3 }}>
-                        <Text style={[addScheduleStyles.checkText]}>
-                          Sunday
-                        </Text>
-                        <CheckBox
-                          onValueChange={() => handleClickCheck(7)}
-                          value={dayList.includes(7)}
-                        />
-                      </View>
-                    </View>
-                  </>
-                )}
-              />
-
-              {errors.time && (
+              {errors.end_date && (
                 <Text style={[signinStyles.text, { color: "red" }]}>
-                  {errors.time.message}
+                  {errors.end_date.message}
                 </Text>
               )}
 
